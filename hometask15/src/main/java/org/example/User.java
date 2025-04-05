@@ -2,17 +2,21 @@ package org.example;
 
 import lombok.*;
 
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
 @ToString
 public class User{
 
-    private String name;
-    private String lastname;
-    private Integer age;
+    private String login;
+
+
+
 
 
 }
+
 
 
