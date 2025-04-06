@@ -1,8 +1,6 @@
-package org.example;
+package org.example.task1;
 
 import lombok.*;
-
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
