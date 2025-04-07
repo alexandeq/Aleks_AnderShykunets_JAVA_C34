@@ -8,7 +8,8 @@ import lombok.*;
 @ToString
 public class User{
 
-    private String login;
+    private String name;
+    private String lastname;
 
 
 
