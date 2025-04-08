@@ -10,7 +10,6 @@ public class Main {
         User user2 = new User("Matt", "Daemon");
         User user3 = new User("Brad", "Pit");
 
-
         Set<User> users = new HashSet<>();
         users.add(user1);
         users.add(user2);
