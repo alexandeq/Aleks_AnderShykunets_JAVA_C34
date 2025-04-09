@@ -7,7 +7,7 @@ import java.util.Set;
 public class MainApp {
     public static void main(String[] args) {
 
-        String[] arr = {"one", "two","three", "four", "five"};
+        String[] arr = {"one", "two", "three", "four", "five"};
 
         Map<String,Integer> words = new HashMap<>();
         words.put(arr[0],arr[0].length());
