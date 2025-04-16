@@ -17,8 +17,8 @@ public class Main {
 
         for (Map.Entry<String, User> pair : usersMap.entrySet()) {
             System.out.println("key is: " + pair.getKey() + " ; " + "value is: " + pair.getValue());
-
-
         }
+
+
     }
 }
