@@ -1,0 +1,196 @@
+/* Основные стили для фона и размещения */
+body {
+  background-color: #fef9f4; /* Кремовый фон */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Контейнер для вертикального расположения суши */
+.sushi-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+
+/* Общий стиль кнопок суши */
+.sushi-button {
+  width: 100px;
+  height: 20px;
+  border: none;
+}
+
+
+.salmon {
+  background-color: #ff914d; /* Оранжевый — лосось */
+}
+
+.rice {
+  background-color: #f5f5f5; /* Светло-серый — рис */
+}
+
+body {
+  background-color: #fff6e6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Контейнер слоёв спагетти */
+.spaghetti-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Общий стиль для "пищевых" кнопок */
+.spag-button {
+  width: 120px;
+  height: 20px;
+  border: none;
+  border-radius: 2px;
+}
+
+/* Слои */
+.cheese {
+  background-color: #fff176; /* светло-жёлтый — сыр */
+}
+
+.sauce {
+  background-color: #e53935; /* томатный соус */
+}
+
+.pasta {
+  background-color: #ffe0b2; /* макароны */
+}
+
+.plate {
+  background-color: #cfd8dc; /* тарелка */
+}
+
+
+body {
+  background-color: #fdf6ec;
+  font-family: Arial, sans-serif;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.food-container {
+  display: flex;
+  gap: 40px;
+}
+
+/* Каждый блок еды */
+.dish {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Общий стиль вертикального стека */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-top: 10px;
+}
+
+/* Общий стиль кнопок */
+.block {
+  width: 100px;
+  height: 20px;
+  border: none;
+  border-radius: 2px;
+}
+
+/* Цвета слоёв (суши) */
+.tuna {
+  background-color: #f87171; /* розовый тунец */
+}
+
+.rice {
+  background-color: #f5f5f5;
+}
+
+
+/* Маффин */
+.cherry {
+  background-color: #dc2626;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  align-self: center;
+}
+.cream {
+  background-color: #f9a8d4;
+}
+.cake {
+  background-color: #a16207;
+}
+.cup {
+  background-color: #6b4f4f;
+}
+
+
+
+
+body {
+  background-color: #fefae0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.burger-layer {
+  height: 40px;
+  margin: 1px auto;
+  border-radius: 8px;
+  border: none;
+}
+
+
+
+.top-bread-upper {
+  width: 830px;
+  border-top-left-radius: 100px;
+  border-top-right-radius: 100px;
+  background-color: #f4a261;
+}
+
+/* Второй верхний слой сужается */
+.top-bread-lower {
+  width: 850px;
+
+  background-color: #f4a261;
+}
+
+.top-bread,
+.bottom-bread {
+  width: 850px;
+}
+
+.lettuce,
+.tomato,
+.cheese,
+.meat {
+  width: 800px;
+}
+.top-bread-upperr { background-color: #f4a261; }
+.top-bread-upper { background-color: #f4a261; }
+.top-bread-lower { background-color: #f4a261; }
+.lettuce         { background-color: #2a9d8f; }
+.tomato          { background-color: #e63946; }
+.cheese          { background-color: #fcd34d; }
+.meat            { background-color: #8d5524; }
+.bottom-bread    { background-color: #f4a261; }
+
+
+
+
