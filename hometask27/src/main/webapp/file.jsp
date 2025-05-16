@@ -27,18 +27,9 @@
 
 
 
-<ul>
 <c:forEach var="car" items="${cars}">
 <li>${car.id} -- ${car.model} -- ${car.price}</li>
 </c:forEach>
-</ul>
-
-
-
-
-
-
-
 
 
 </body>
