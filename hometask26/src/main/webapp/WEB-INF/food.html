@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hometask26</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+  <link rel="stylesheet" href="colors.css">
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">FOOD</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Наши точки</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Доставка</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Акции
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">1 + 1 = 1</a></li>
+            <li><a class="dropdown-item" href="#">Выходные - 20%</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Бесплатные суши за отзыв</a></li>
+            <li><a class="dropdown-item" href="#">
+              <div class="spinner-border text-warning" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div></a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Search"/>
+        <button class="btn btn-outline-success" type="submit">Поиск</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-2">
+      <div class="accordion" id="accordionPanelsStayOpenExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                    aria-controls="panelsStayOpen-collapseOne">
+              Суши лосось
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+            <div class="accordion-body">
+              <div class="stack">
+                <button class="btn sushi-button salmon"></button>
+                <button class="btn sushi-button rice"></button>
+                <button class="btn sushi-button rice"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+                    aria-controls="panelsStayOpen-collapseTwo">
+              Суши тунец
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+            <div class="accordion-body">
+              <div class="dish">
+                <div class="stack">
+                  <button class="btn sushi-button tuna"></button>
+                  <button class="btn sushi-button rice"></button>
+                  <button class="btn sushi-button rice"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+                    aria-controls="panelsStayOpen-collapseThree">
+              Вишневый маффин
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+            <div class="accordion-body">
+              <div class="dish">
+                <div class="stack">
+                  <button class="btn sushi-button cherry"></button>
+                  <button class="btn sushi-button cream"></button>
+                  <button class="btn sushi-button cake"></button>
+                  <button class="btn sushi-button cup"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseCoffee" aria-expanded="false"
+                    aria-controls="panelsStayOpen-collapseCoffee">
+              Кофе
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseCoffee" class="accordion-collapse collapse">
+            <div class="accordion-body">
+              <div class="dish">
+                <div class="stack">
+                  <button class="btn sushi-button foam"></button>
+                  <button class="btn sushi-button coffee"></button>
+                  <button class="btn sushi-button coffee"></button>
+                  <button class="btn sushi-button coffee"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-9 d-flex justify-content-center align-items-center">
+      <div class="text-center">
+        <button class="btn burger-layer top-bread-upper"></button>
+        <button class="btn burger-layer top-bread-lower"></button>
+        <button class="btn burger-layer lettuce"></button>
+        <button class="btn burger-layer tomato"></button>
+        <button class="btn burger-layer cheese"></button>
+        <button class="btn burger-layer meat"></button>
+        <button class="btn burger-layer bottom-bread"></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container mt-5">
+  <div class="row">
+    <p class="d-inline-flex gap-1">
+      <a class="btn btn special1" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Специальное предложение №1
+      </a>
+    </p>
+    <div class="collapse" id="collapseExample">
+      <div class="card card-body">
+        Только в выходные дни, завтраки можно купить целый день
+      </div>
+    </div>
+
+
+  <div>
+    <div class="container mt-5">
+      <div class="row">
+        <p class="d-inline-flex gap-1">
+          <a class="btn btn special2" data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample1">
+            Специальное предложение №2
+          </a>
+        </p>
+        <div class="collapse" id="collapseExample1">
+          <div class="card card-body">
+              <div class="container text-center mt-5">
+
+                <button class="btn egg white1"></button>
+                <button class="btn egg white2"></button>
+                <button class="btn egg white3"></button>
+
+                <button class="btn egg yolk-top"></button>
+                <button class="btn egg yolk-bottom"></button>
+
+                <button class="btn egg white3"></button>
+                <button class="btn egg white2"></button>
+                <button class="btn egg white4"></button>
+              </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+</body>
+</html>
