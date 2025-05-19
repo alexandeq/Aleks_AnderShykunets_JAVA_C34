@@ -1,0 +1,26 @@
+
+.reg{
+background-color: lightblue;
+}
+
+.data{
+color: red;
+}
+
+.role{
+background-color: darkgreen;
+color: 	ivory;
+}
+.submit{
+background-color: Lavender;
+
+}
+div {
+    background-color: #98ff98;
+    border: 2px dashed darkgreen;
+    border-radius: 5px;
+}
+body {
+    background-color: gray;
+    padding: 20px;
+}
