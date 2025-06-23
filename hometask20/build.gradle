@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-
 }
 
 group = 'org.example'
@@ -11,7 +10,9 @@ repositories {
 }
 
 dependencies {
-   // compileOnly("javax.servlet:javax.servlet-api:4.0.1")
+    compileOnly 'org.projectlombok:lombok:1.18.36'
+    annotationProcessor 'org.projectlombok:lombok:1.18.36'
+    implementation("org.postgresql:postgresql:42.7.5")
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
