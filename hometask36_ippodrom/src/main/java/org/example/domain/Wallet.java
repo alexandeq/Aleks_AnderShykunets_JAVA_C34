@@ -14,14 +14,4 @@ public class Wallet {
     private Integer amountBet;
     private Integer horseBet;
 
-//    public Wallet(Integer bet) {
-//        this.bet = bet;
-//    }
-//
-//    public Wallet(Integer horseBet) {
-//        this.horseBet = horseBet;
-//    }
 }
-
-
-
