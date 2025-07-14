@@ -1,29 +1,42 @@
 package org.example.service.impl;
 
+import lombok.RequiredArgsConstructor;
+import org.example.domain.Bet;
 import org.example.domain.Horse;
 import org.example.domain.Wallet;
 import org.example.service.BetService;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
-@Service
-public class BetServiceImpl implements BetService {
-    @Override
-    public void winLose(Wallet wallet) {
 
-        var bet = wallet.getAmountBet();
+@RequiredArgsConstructor
+@Service
+public class BetServiceImpl implements BetService{
+
+    private final Wallet wallet;
+    private final List<Horse> horsesList;
+
+
+    @Override
+    public void winLose(Bet bet) {
+
+        var amountBet = bet.getAmountBet();
 
         Random random = new Random();
-        var randomHorse = Horse.getHorses().get(random.nextInt(Horse.getHorses().size()));
+        Horse randomHorse = horsesList.get(random.nextInt(horsesList.size()));
 
-        if (Objects.equals(randomHorse, wallet.getHorseBet())) {
-            wallet.setAmount(wallet.getAmount() + (bet * 2));
-            System.out.println("Вы угадали. Победила лошадь №" + randomHorse);
-            System.out.println("Ваш выйгрыш: " + (bet * 2));
+
+        if (randomHorse.getName().equals(String.valueOf(bet.getHorseBet()))){
+
+            wallet.setAmount(wallet.getAmount() + (amountBet * 2));
+            System.out.println("Вы угадали. Победила лошадь №" + randomHorse.getName());
+            System.out.println("Ваш выйгрыш: " + (amountBet * 2));
         } else {
-            wallet.setAmount(wallet.getAmount() - bet);
-            System.out.println("Вы проиграли. Победила лошадь №" + randomHorse);
+            wallet.setAmount(wallet.getAmount() - amountBet);
+            System.out.println("Вы проиграли. Победила лошадь №" + randomHorse.getName());
         }
 
     }

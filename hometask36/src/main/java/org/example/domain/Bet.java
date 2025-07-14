@@ -4,15 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.stereotype.Component;
 
-@Setter @Getter
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Component
-public class Wallet {
+public class Bet {
 
-    private Integer amount = 5000;
-
-
+    private Integer amountBet;
+    private Integer horseBet;
 }

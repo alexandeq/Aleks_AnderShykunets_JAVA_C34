@@ -14,8 +14,6 @@ public class NotificationServiceImpl implements NotificationService {
         System.out.println("Лошадь №1: ------------\uD83D\uDC0E");
         System.out.println("Лошадь №2: -----------\uD83D\uDC0E");
         System.out.println("Лошадь №3: ----------\uD83D\uDC0E");
-        System.out.println("Лошадь №4: ------------\uD83D\uDC0E");
-        System.out.println("Лошадь №5: ---------\uD83D\uDC0E");
 
         try {
             Thread.sleep(5_000);

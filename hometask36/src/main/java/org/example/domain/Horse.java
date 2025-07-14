@@ -1,15 +1,17 @@
 package org.example.domain;
 
+
 import lombok.*;
 
-import java.util.List;
-
-
-@RequiredArgsConstructor
+@Getter
+@Setter
+@AllArgsConstructor
+@ToString
 public  class Horse {
 
-   @Getter
-   public static final List<Integer> horses = List.of(1,2,3,4,5);
+   private String name;
+
+
 
 }
 

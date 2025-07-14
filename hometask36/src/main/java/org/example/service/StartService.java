@@ -2,7 +2,9 @@ package org.example.service;
 
 import org.example.domain.Bet;
 
-public interface BetService {
+public interface StartService {
 
-    void winLose(Bet bet);
+    void start(Bet bet);
+
+
 }
