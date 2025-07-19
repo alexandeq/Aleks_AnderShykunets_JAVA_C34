@@ -24,6 +24,7 @@ public class PersonController {
         System.out.println("Lastname: " + lastname);
 
         return "index";
+
     }
 }
 
