@@ -1,12 +1,10 @@
 package org.example;
 
-
 import org.example.domain.Bet;
 import org.example.domain.Wallet;
 import org.example.service.RaceHandler;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
 
 public class Main {
 

@@ -66,10 +66,7 @@ public class RaceHandlerImpl implements RaceHandler {
             }
 
         }
-
-
     }
-
 }
 
 

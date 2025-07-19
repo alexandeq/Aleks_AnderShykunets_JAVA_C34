@@ -1,6 +1,4 @@
 package org.example.service.impl;
-
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.example.domain.Bet;
 import org.example.domain.Wallet;

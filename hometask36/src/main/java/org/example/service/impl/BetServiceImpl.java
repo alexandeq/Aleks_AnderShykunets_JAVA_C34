@@ -6,11 +6,8 @@ import org.example.domain.Horse;
 import org.example.domain.Wallet;
 import org.example.service.BetService;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
-
 
 @RequiredArgsConstructor
 @Service
@@ -19,7 +16,6 @@ public class BetServiceImpl implements BetService{
     private final Wallet wallet;
     private final List<Horse> horsesList;
 
-
     @Override
     public void winLose(Bet bet) {
 
@@ -27,7 +23,6 @@ public class BetServiceImpl implements BetService{
 
         Random random = new Random();
         Horse randomHorse = horsesList.get(random.nextInt(horsesList.size()));
-
 
         if (randomHorse.getName().equals(String.valueOf(bet.getHorseBet()))){
 

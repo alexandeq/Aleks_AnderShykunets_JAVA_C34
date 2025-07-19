@@ -20,7 +20,6 @@ public class StartServiceImpl implements StartService {
 
     @Override
     public void start(Bet bet) {
-        Bet newBet = new Bet();
         Scanner in = new Scanner(System.in);
 
         System.out.println("Ваш баланс: " + wallet.getAmount());

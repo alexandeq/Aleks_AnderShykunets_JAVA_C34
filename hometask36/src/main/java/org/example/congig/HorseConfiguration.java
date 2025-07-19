@@ -1,6 +1,4 @@
 package org.example.congig;
-
-import lombok.ToString;
 import org.example.domain.Horse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
