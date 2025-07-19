@@ -33,5 +33,6 @@ public class HomeController {
 
         profileService.process(person);
         return "index";
+
     }
 }

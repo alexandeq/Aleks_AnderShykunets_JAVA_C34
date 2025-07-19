@@ -22,5 +22,4 @@ public class ExceptionController {
         model.addAttribute("age", exc.getPersonDto().getAge());
         return "ageError";
     }
-
 }
