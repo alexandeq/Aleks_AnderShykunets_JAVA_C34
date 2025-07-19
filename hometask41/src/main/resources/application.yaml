@@ -1,0 +1,11 @@
+app:
+  age:
+    min: 18
+    max: 111
+  name: John
+  lastname: Smith
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
