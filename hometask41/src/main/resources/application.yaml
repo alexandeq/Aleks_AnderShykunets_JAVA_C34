@@ -4,8 +4,10 @@ app:
     max: 111
   name: John
   lastname: Smith
+
 management:
   endpoints:
     web:
       exposure:
         include: '*'
+

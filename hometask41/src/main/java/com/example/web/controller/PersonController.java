@@ -17,13 +17,21 @@ public class PersonController {
     private String lastname;
 
     @GetMapping
+
+    public String personInfo() {
+
+
     public String personInfo(){
+
         System.out.println("Min age: " + minAge);
         System.out.println("Max age: " + maxAge);
         System.out.println("Name: " + name);
         System.out.println("Lastname: " + lastname);
 
         return "index";
-    }
 
+
+    }
 }
+
+
