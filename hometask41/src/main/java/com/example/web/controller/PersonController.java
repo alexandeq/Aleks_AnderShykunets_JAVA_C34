@@ -1,4 +1,5 @@
 package com.example.web.controller;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,11 @@ public class PersonController {
     private String lastname;
 
     @GetMapping
+
     public String personInfo() {
+
+
+    public String personInfo(){
 
         System.out.println("Min age: " + minAge);
         System.out.println("Max age: " + maxAge);
@@ -24,6 +29,7 @@ public class PersonController {
         System.out.println("Lastname: " + lastname);
 
         return "index";
+
 
     }
 }
