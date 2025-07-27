@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Фильмотека</title>
+</head>
+<body>
+
+<h2 th:text="#{label.title}"></h2>
+
+<a href="?lang=ru">RU</a> | <a href="?lang=en">EN</a>
+
+    <form th:action="@{/movies}" method="post" th:object="${movie}">
+        <p th:text="#{movie.title}"></p>
+        <input type="text" th:field="*{title}"> <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Incorrect title</div>
+
+        <p th:text="#{rating}"></p>
+        <input type="number" th:field="*{rating}" /> <div th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}">Incorrect rating</div><br>
+
+        <input type="submit" th:value="#{submit}" />
+    </form>
+
+    <h2 th:text="#{movie.list}"></h2>
+    <ul>
+        <li th:each="movie : ${movies}">
+            <p th:text="${movie.getTitle()} + ' : ' + ${movie.getRating()}"></p>
+        </li>
+    </ul>
+
+
+</body>
+</html>
