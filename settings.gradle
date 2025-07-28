@@ -1,4 +1,11 @@
 rootProject.name = 'Aleks_AnderShykunets_JAVA_C34'
+include hometask41_sb
+include 'hometask40'
+include 'hometask41'
+include hometask40_spring
+include 'hometask40'
+include 'hometask41'
+include 'hometask10'
 include 'hometask5'
 include 'lesson6'
 include 'hometask6'
@@ -18,6 +25,24 @@ include 'hometask13'
 include 'ippodrom'
 include 'hometask36_ippodrom'
 include 'hometask43'
-
-
+include 'hometask36'
+include 'hometask40'
+include 'hometask41'
+include 'hometask39'
+include 'hometask38'
+include 'hometask38'
+include 'hometask33'
+include 'hometask34'
+include 'hometask35'
+include 'hometask32'
+include 'hometask23'
+include 'hometask19'
+include 'hometask20'
+include 'hometask22'
+include 'hometask15'
+include 'hometask18'
+include 'hometask16'
+include 'hometask17'
+include 'Hometask14_collection'
+include master
 
