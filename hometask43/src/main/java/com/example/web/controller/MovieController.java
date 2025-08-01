@@ -1,43 +1,33 @@
 package com.example.web.controller;
 import com.example.web.domain.MovieDto;
+import com.example.web.domain.MovieSearchDto;
+import com.example.web.service.MovieService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/movie")
+@RequiredArgsConstructor
 public class MovieController {
 
-    private final List<MovieDto> movieList = new ArrayList<>();
+    private final MovieService service;
 
-    @GetMapping()
-    public String home(Model model) {
-        model.addAttribute("movie", new MovieDto());
-        model.addAttribute("movies", movieList);
-        return "index";
+    @PostMapping
+    public String movie(@Valid MovieDto dto, Model model) {
+        service.save(dto);
+        model.addAttribute("movies", service.findAll());
+        return "index.html";
     }
 
-    @PostMapping("/movies")
-    public String allMovies(
-            @Valid @ModelAttribute("movie") MovieDto movie,
-            BindingResult result,
-            Model model) {
-
-        if (result.hasErrors()) {
-            model.addAttribute("movies", movieList);
-            return "index";
-        }
-
-        movieList.add(movie);
-
-        model.addAttribute("movie", new MovieDto());
-        model.addAttribute("movies", movieList);
-        return "index";
+    @PostMapping("/search")
+    public String search(MovieSearchDto dto, Model model){
+        var result = service.findByTitle(dto);
+        model.addAttribute("movies",result);
+        return "index.html";
     }
+
 }
