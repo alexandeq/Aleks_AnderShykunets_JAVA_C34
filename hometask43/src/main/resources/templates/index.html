@@ -10,22 +10,26 @@
 
 <a href="?lang=ru">RU</a> | <a href="?lang=en">EN</a>
 
-    <form th:action="@{/movies}" method="post" th:object="${movie}">
-        <p th:text="#{movie.title}"></p>
-        <input type="text" th:field="*{title}"> <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Incorrect title</div>
+<form action="/movie" method="post">
 
-        <p th:text="#{rating}"></p>
-        <input type="number" th:field="*{rating}" /> <div th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}">Incorrect rating</div><br>
+    <p th:text="#{movie.title}"></p> <input type="text" name="title"><br>
+    <p th:text="#{rating}"></p> <input type="number" name="rating"><br>
 
-        <input type="submit" th:value="#{submit}" />
-    </form>
+    <input type="submit" th:value="#{submit}"/>
+</form>
 
-    <h2 th:text="#{movie.list}"></h2>
-    <ul>
-        <li th:each="movie : ${movies}">
-            <p th:text="${movie.getTitle()} + ' : ' + ${movie.getRating()}"></p>
-        </li>
-    </ul>
+<hr>
+
+<form action="/movie/search" method="post">
+    <p th:text="#{search.title}"></p> <input type="text" name="title"> <br>
+    <input type="submit" th:value="#{find}"/>
+</form>
+
+<hr>
+
+<ul>
+    <li th:each="item : ${movies}"><p th:text="${item.getTitle()} + ' : ' + ${item.getRating()}"/> </li>
+</ul>
 
 
 </body>
