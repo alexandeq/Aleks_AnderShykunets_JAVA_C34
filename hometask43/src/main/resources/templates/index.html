@@ -11,21 +11,27 @@
 <a href="?lang=ru">RU</a> | <a href="?lang=en">EN</a>
 
 <form action="/movie" method="post">
-
     <p th:text="#{movie.title}"></p> <input type="text" name="title"><br>
     <p th:text="#{rating}"></p> <input type="number" name="rating"><br>
-
     <input type="submit" th:value="#{submit}"/>
 </form>
 
 <hr>
 
 <form action="/movie/search" method="post">
-    <p th:text="#{search.title}"></p> <input type="text" name="title"> <br>
-    <input type="submit" th:value="#{find}"/>
+    Search title: <input type="text" name="title"> <br>
+    Search rating from: <input type="number" name="from"><br>
+    Search rating to: <input type="number" name="to"><br>
+    <input type="submit" value="find">
 </form>
 
 <hr>
+
+<form action="movie/page" method="post">
+    Page: <input type="number" name="page"><br>
+    Size: <input type="number" name="size"><br>
+    <input type="submit" value="Find">
+</form>
 
 <ul>
     <li th:each="item : ${movies}"><p th:text="${item.getTitle()} + ' : ' + ${item.getRating()}"/> </li>

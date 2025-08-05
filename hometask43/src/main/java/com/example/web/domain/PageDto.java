@@ -8,11 +8,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
-public class MovieSearchDto {
+public class PageDto {
 
-    private String title;
-
-    private Integer from;
-    private Integer to;
+    private Integer page;
+    private Integer size;
 
 }

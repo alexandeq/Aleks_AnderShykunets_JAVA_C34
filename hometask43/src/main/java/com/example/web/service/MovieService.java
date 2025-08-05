@@ -2,6 +2,7 @@ package com.example.web.service;
 
 import com.example.web.domain.MovieDto;
 import com.example.web.domain.MovieSearchDto;
+import com.example.web.domain.PageDto;
 
 import java.util.List;
 
@@ -11,5 +12,7 @@ public interface MovieService {
 
     List<MovieDto> findAll();
 
-    List<MovieDto> findByTitle(MovieSearchDto dto);
+    List<MovieDto> searchByTitleOrRating(MovieSearchDto dto);
+
+    List<MovieDto> findPageable(PageDto dto);
 }
