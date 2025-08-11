@@ -1,0 +1,13 @@
+package com.example.web.repository;
+
+import com.example.web.entity.MovieEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+import java.util.UUID;
+
+public interface MovieRepository extends JpaRepository <MovieEntity, UUID> {
+
+    List<MovieEntity> findByTitle(String title);
+
+}
