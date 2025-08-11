@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Фильмотека</title>
+</head>
+<body>
+
+<h2 th:text="#{label.title}"></h2>
+
+<a href="?lang=ru">RU</a> | <a href="?lang=en">EN</a>
+
+<form action="/movie" method="post">
+
+    <p th:text="#{movie.title}"></p> <input type="text" name="title"><br>
+    <p th:text="#{rating}"></p> <input type="number" name="rating"><br>
+
+    <input type="submit" th:value="#{submit}"/>
+</form>
+
+<hr>
+
+<form action="/movie/search" method="post">
+    <p th:text="#{search.title}"></p> <input type="text" name="title"> <br>
+    <input type="submit" th:value="#{find}"/>
+</form>
+
+<hr>
+
+<ul>
+    <li th:each="item : ${movies}"><p th:text="${item.getTitle()} + ' : ' + ${item.getRating()}"/> </li>
+</ul>
+
+
+</body>
+</html>
