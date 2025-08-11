@@ -1,4 +1,6 @@
 rootProject.name = 'Aleks_AnderShykunets_JAVA_C34'
+include 'hometask47-BL'
+include 'hometask47-IL'
 include hometask41_sb
 include 'hometask40'
 include 'hometask41'
