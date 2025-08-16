@@ -11,7 +11,7 @@ public interface HotelService {
 
     HotelDto findById(UUID id);
 
-    List<HotelDto> findAllById();
+    List<HotelDto> findAll();
 
     HotelDto updateById(UUID id, HotelDto dto);
 

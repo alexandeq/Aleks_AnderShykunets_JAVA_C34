@@ -27,7 +27,7 @@ public class HotelController {
 
     @GetMapping("/all")
     public List<HotelDto> findAll() {
-        return service.findAllById();
+        return service.findAll();
     }
 
     @PutMapping
