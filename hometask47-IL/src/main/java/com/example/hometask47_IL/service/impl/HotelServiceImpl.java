@@ -1,5 +1,6 @@
 package com.example.hometask47_IL.service.impl;
 
+import com.example.hometask47_IL.client.OrderClient;
 import com.example.hometask47_IL.dto.HotelDto;
 import com.example.hometask47_IL.service.HotelService;
 import lombok.RequiredArgsConstructor;
@@ -15,16 +16,15 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class HotelServiceImpl implements HotelService {
 
-    private final RestTemplate restTemplate;
+    private final OrderClient client;
 
     @Override
     public HotelDto createHotel(HotelDto dto) {
-        return restTemplate.postForObject("http://localhost:8081/hotel", dto, HotelDto.class);
+        return client.save(dto);
     }
 
     @Override
     public List<HotelDto> getAllHotels() {
-        var result = restTemplate.getForObject("http://localhost:8081/hotel/all", HotelDto[].class);
-        return Arrays.stream(result).collect(Collectors.toList());
+        return client.findAll();
     }
 }
