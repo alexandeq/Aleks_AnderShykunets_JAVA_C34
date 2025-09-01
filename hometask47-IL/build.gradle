@@ -27,6 +27,8 @@ repositories {
 }
 
 dependencies {
+	implementation("io.swagger.core.v3:swagger-annotations:2.2.35")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.9")
 	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
