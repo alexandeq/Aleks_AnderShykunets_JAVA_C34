@@ -1,4 +1,5 @@
 rootProject.name = 'Aleks_AnderShykunets_JAVA_C34'
+include 'hometask50'
 include 'hometask47-BL'
 include 'hometask47-IL'
 include hometask41_sb
@@ -48,5 +49,4 @@ include 'hometask16'
 include 'hometask17'
 include 'Hometask14_collection'
 include master
-
 
