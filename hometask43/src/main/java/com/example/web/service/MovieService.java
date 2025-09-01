@@ -1,0 +1,18 @@
+package com.example.web.service;
+
+import com.example.web.domain.MovieDto;
+import com.example.web.domain.MovieSearchDto;
+import com.example.web.domain.PageDto;
+
+import java.util.List;
+
+public interface MovieService {
+
+    void save(MovieDto dto);
+
+    List<MovieDto> findAll();
+
+    List<MovieDto> searchByTitleOrRating(MovieSearchDto dto);
+
+    List<MovieDto> findPageable(PageDto dto);
+}
