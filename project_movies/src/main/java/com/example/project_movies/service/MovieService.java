@@ -1,0 +1,22 @@
+package com.example.project_movies.service;
+
+import com.example.project_movies.dto.MovieDto;
+
+import java.util.List;
+import java.util.UUID;
+
+public interface MovieService {
+
+    MovieDto save(MovieDto dto);
+
+    List<MovieDto> findAll();
+
+    void delete(UUID id);
+
+    MovieDto findById(UUID id);
+
+    MovieDto updateByIdByAdmin(UUID id, MovieDto dto);
+
+    MovieDto sendCommentByUser(UUID id, MovieDto dto);
+
+}
