@@ -7,20 +7,20 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/film")
+@RequestMapping("/user")
 public class PersonController {
 
     private final PersonService service;
 
     @PostMapping
     public PersonDto save(@RequestBody PersonDto dto){
-        return service.save(dto);
+        return service.create(dto);
 
     }
 
     @GetMapping
-    public PersonDto findByLogin(@RequestParam("login") String login){
-        return service.findByLogin(login);
+    public PersonDto findByUsername(@RequestParam("username") String username){
+        return service.findByUsername(username);
     }
 
 

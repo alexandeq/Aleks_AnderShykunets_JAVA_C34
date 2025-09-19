@@ -1,7 +1,8 @@
 create table persons(
     id uuid primary key,
-    login varchar,
-    password varchar
+    username varchar,
+    password varchar,
+    authorities varchar
 
 
-)
+);

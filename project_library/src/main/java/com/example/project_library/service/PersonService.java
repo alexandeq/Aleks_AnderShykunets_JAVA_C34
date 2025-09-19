@@ -4,9 +4,9 @@ import com.example.project_library.dto.PersonDto;
 import org.springframework.stereotype.Service;
 
 @Service
-public interface PersonService {
+public interface PersonService  {
 
     PersonDto create(PersonDto dto);
 
-    PersonDto findByLogin(String login);
+    PersonDto findByUsername(String username);
 }

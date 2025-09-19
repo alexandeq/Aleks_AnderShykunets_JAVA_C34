@@ -4,7 +4,6 @@ import com.example.project_library.dto.ErrorDto;
 import com.example.project_library.exc.CommonException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import feign.codec.ErrorDecoder;
-import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

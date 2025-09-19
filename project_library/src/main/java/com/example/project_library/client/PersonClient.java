@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = "user-client", url = "http://localhost:8081", path = "/film")
-public interface UserClient {
+@FeignClient(name = "user-client", url = "http://localhost:8081", path = "/user")
+public interface PersonClient {
 
     @PostMapping
     PersonDto save(@RequestBody PersonDto dto);
 
     @GetMapping
-    PersonDto find(@RequestParam("login") String login);
+    PersonDto find(@RequestParam("username") String username);
 
 
 }

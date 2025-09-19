@@ -2,17 +2,15 @@ package com.example.project_library.web;
 import com.example.project_library.dto.MovieDto;
 import com.example.project_library.service.MovieService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
 
-@RestController
+@Controller
 @RequiredArgsConstructor
-@RequestMapping("/movies")
+@RequestMapping("/movie")
 public class MovieController {
 
     private final MovieService service;
@@ -22,10 +20,22 @@ public class MovieController {
         return service.getMovies();
     }
 
-//    @GetMapping
-//    public MovieDto findById(@RequestParam(name = "id") UUID id){
-//        return service.findById(id);
-//    }
+    @PostMapping
+    public String test1(){
+        return "all_movies";
+    }
 
+    @GetMapping
+    public String test(){
+        return "all_movies";
+    }
+    @GetMapping("/admin")
+    public String admin(){
+        return "admin";
+    }
+    @PostMapping("/user")
+    public String user(){
+        return "user";
+    }
 
 }

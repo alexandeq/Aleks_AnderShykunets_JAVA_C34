@@ -13,7 +13,8 @@ import java.util.UUID;
 public class PersonDto {
 
     private UUID id;
-    private String login;
-//    private String password;
-    //private Boolean isAdmin;
+    private String username;
+    private String password;
+    private String authorities;
+
 }

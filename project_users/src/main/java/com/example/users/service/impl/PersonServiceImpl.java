@@ -6,6 +6,7 @@ import com.example.users.mapper.PersonMapper;
 import com.example.users.repository.PersonRepository;
 import com.example.users.service.PersonService;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,24 +18,33 @@ public class PersonServiceImpl implements PersonService {
 
 
     @Override
-    public PersonDto save(PersonDto dto) {
+    public PersonDto create(PersonDto dto) {
+
+        if (repo.existsByUsername(dto.getUsername())) {
+            throw new UserCommonException(808101, "User already exists");
+        }
         var entity = mapper.toEntity(dto);
 
-        if(repo.existsByLogin(entity.getLogin())){
-            throw  new UserCommonException(808101, "user with login: " + entity.getLogin() + " - already exist");
+        var saved = repo.save(entity);
+        return mapper.toDto(saved);
 
-        }
-        var result = repo.save(entity);
-
-        return mapper.toDto(result);
     }
+
 
     @Override
-    public PersonDto findByLogin(String login) {
+    public PersonDto findByUsername(String username) {
 
-        if(!repo.existsByLogin(login)){
-            throw new UserCommonException(808102, "user with login: " + login + " - not found");
+        if (!repo.existsByUsername(username)) {
+            throw new UserCommonException(808102, "user with login: " + username + " - not found");
         }
-        return mapper.toDto(repo.findByLogin(login));
+        return mapper.toDto(repo.findByUsername(username));
+
     }
+
+
 }
+
+
+
+
+

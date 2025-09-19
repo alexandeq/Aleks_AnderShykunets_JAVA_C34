@@ -6,7 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.UUID;
 
 public interface PersonRepository extends JpaRepository<PersonEntity, UUID> {
-    PersonEntity findByLogin(String login);
 
-    boolean existsByLogin(String login);
+    PersonEntity findByUsername(String username);
+
+    boolean existsByUsername(String username);
 }
