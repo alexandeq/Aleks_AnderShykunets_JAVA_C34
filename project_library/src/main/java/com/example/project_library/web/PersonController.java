@@ -12,6 +12,12 @@ public class PersonController {
 
     private final PersonService service;
 
+    @GetMapping("/register")
+    public String registerForm(Model model) {
+        model.addAttribute("user", new PersonDto());
+        return "register";
+    }
+
     @PostMapping("/register")
     public String register(@ModelAttribute("user") PersonDto dto, Model model) {
         service.create(dto);
@@ -19,19 +25,10 @@ public class PersonController {
         return "success";
     }
 
-    @GetMapping("/register")
-    public String form(Model model) {
-        model.addAttribute("user", new PersonDto());
-        return "register";
-    }
-
     @GetMapping("/login")
-    public String login() {
+    public String loginPage() {
         return "login";
     }
 }
-
-//
-
 
 

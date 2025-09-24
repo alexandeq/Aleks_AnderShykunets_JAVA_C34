@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,9 +13,10 @@ public class MovieDto {
 
     private UUID id;
     private String name;
-    private Integer rating;
-    private String comment;
-    private Integer year;
+    private int year;
+    private double rating;
+    private String description;
+    private List<CommentDto> comments;
 
     //картинка
 

@@ -8,13 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
 import java.util.UUID;
 
 @Table(name = "persons")
@@ -23,7 +16,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Getter @Setter
 
-public class PersonEntity implements UserDetails {
+public class PersonEntity  {
 
     @Id
     @UuidGenerator
@@ -31,10 +24,8 @@ public class PersonEntity implements UserDetails {
 
     private String username;
     private String password;
-    private String authorities;
+    private String authority;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
-    }
+
 }
+

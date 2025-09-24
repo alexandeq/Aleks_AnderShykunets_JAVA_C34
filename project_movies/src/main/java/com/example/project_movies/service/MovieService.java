@@ -1,5 +1,6 @@
 package com.example.project_movies.service;
 
+import com.example.project_movies.dto.CommentDto;
 import com.example.project_movies.dto.MovieDto;
 
 import java.util.List;
@@ -17,6 +18,8 @@ public interface MovieService {
 
     MovieDto updateByIdByAdmin(UUID id, MovieDto dto);
 
-    MovieDto sendCommentByUser(UUID id, MovieDto dto);
+    List<CommentDto> getComments(UUID movieId);
+
+    CommentDto addCommentByUser(UUID movieId, CommentDto dto);
 
 }

@@ -1,5 +1,6 @@
 package com.example.project_movies.web;
 
+import com.example.project_movies.dto.CommentDto;
 import com.example.project_movies.dto.MovieDto;
 import com.example.project_movies.service.MovieService;
 import lombok.RequiredArgsConstructor;
@@ -19,25 +20,37 @@ public class MovieController {
         return  service.save(dto);
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public List<MovieDto> getAll(){
         return service.findAll();
     }
 
-    @GetMapping
-    public MovieDto findById(@RequestParam(name = "id") UUID id){
+    @GetMapping("/{id}")
+    public MovieDto findById(@PathVariable UUID id) {
         return service.findById(id);
     }
+
+    @PostMapping("/{id}/comments")
+    public CommentDto addComment(@PathVariable UUID id, @RequestBody CommentDto dto) {
+        return service.addCommentByUser(id, dto);
+    }
+
+    // Получить все комментарии к фильму
+    @GetMapping("/{id}/comments")
+    public List<CommentDto> getComments(@PathVariable UUID id) {
+        return service.getComments(id);
+    }
+
 
     @PutMapping("/admin")
     public MovieDto update(@RequestParam UUID id, @RequestBody MovieDto dto) {
         return service.updateByIdByAdmin(id, dto);
     }
 
-    @PutMapping("/user")
-    public MovieDto sendComment(@RequestParam UUID id, @RequestBody MovieDto dto) {
-        return service.sendCommentByUser(id, dto);
-    }
+//    @PutMapping("/user")
+//    public MovieDto sendComment(@RequestParam UUID id, @RequestBody MovieDto dto) {
+//        return service.sendCommentByUser(id, dto);
+//    }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable UUID id) {

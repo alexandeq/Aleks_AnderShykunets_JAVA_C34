@@ -7,11 +7,14 @@ import com.example.users.repository.PersonRepository;
 import com.example.users.service.PersonService;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class PersonServiceImpl implements PersonService {
+public class PersonServiceImpl implements PersonService, UserDetailsService {
 
     private final PersonRepository repo;
     private final PersonMapper mapper;
@@ -41,8 +44,15 @@ public class PersonServiceImpl implements PersonService {
 
     }
 
-
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return repo.findByUsername(username);
+            //.orElseThrow();
+    }
 }
+
+
+
 
 
 

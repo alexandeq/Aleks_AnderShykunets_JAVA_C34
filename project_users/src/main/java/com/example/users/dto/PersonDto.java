@@ -14,6 +14,6 @@ public class PersonDto {
     private UUID id;
     private String username;
     private String password;
-    private String authorities;
+    private String authority;
 
 }

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Выбор роли</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<h2>Выберите роль</h2>
+
+<div>
+    <form th:action="@{/movie/user}" method="get">
+        <button type="submit">Перейти как USER</button>
+    </form>
+</div>
+
+<div>
+    <form th:action="@{/movie/admin}" method="post">
+        <button type="submit">Перейти как ADMIN</button>
+    </form>
+</div>
+
+<br>
+
+Logout
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout">
+
+</form>
+
+</body>
+</html>
+
+

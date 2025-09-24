@@ -1,14 +1,15 @@
 package com.example.project_movies.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.example.project_movies.dto.CommentDto;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Table(name = "movies")
@@ -23,9 +24,12 @@ public class MovieEntity {
     private UUID id;
 
     private String name;
-    private Integer rating;
-    private String comment;
-    private Integer year;
+    private int year;
+    private double rating;
+    private String description;
+
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<CommentEntity> comments = new ArrayList<>();
     //картинка
 
 }
