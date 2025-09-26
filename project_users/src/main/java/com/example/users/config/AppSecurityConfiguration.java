@@ -15,27 +15,27 @@ public class AppSecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.authorizeHttpRequests(registry -> { registry
-                        .requestMatchers("/register", "/login/**", "/person/**").permitAll()
+                        .requestMatchers("/person/**", "/login/**", "/logout/**").permitAll()
                         .requestMatchers("/movie/admin/**").hasAuthority("ADMIN")
                         .requestMatchers("/movie/user/**").hasAuthority("USER")
                         .requestMatchers("/movie/**").authenticated()
                         .anyRequest().authenticated();
                 })
+
+
                 .formLogin(form -> form
                         .loginPage("/login")  // кастомная форма логина
                         .defaultSuccessUrl("/movie", true)
                         .permitAll()
                 )
-                .logout(cust -> cust
-                        .invalidateHttpSession(true)
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/login?logout")
-                )
+                .logout(cust -> {
+                    cust.invalidateHttpSession(true)
+                            .logoutUrl("/login")
+                            .logoutSuccessUrl("/login?logout");
+                })
                 .build();
 
     }
-
-
 
         @Bean
         public PasswordEncoder passwordEncoder () {

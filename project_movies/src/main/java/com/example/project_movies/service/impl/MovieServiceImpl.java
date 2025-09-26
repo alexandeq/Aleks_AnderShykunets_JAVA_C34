@@ -1,11 +1,12 @@
 package com.example.project_movies.service.impl;
-
 import com.example.project_movies.domain.CommentEntity;
+import com.example.project_movies.domain.MovieEntity;
 import com.example.project_movies.dto.CommentDto;
 import com.example.project_movies.dto.MovieDto;
 import com.example.project_movies.exc.MovieCommonException;
 import com.example.project_movies.mapper.CommentMapper;
 import com.example.project_movies.mapper.MovieMapper;
+
 import com.example.project_movies.repository.CommentRepository;
 import com.example.project_movies.repository.MovieRepository;
 import com.example.project_movies.service.MovieService;
@@ -52,7 +53,7 @@ public class MovieServiceImpl implements MovieService {
     public MovieDto updateByIdByAdmin(UUID id, MovieDto dto) {
         var existingEntity = movieRepo.findById(id).get();
 
-        existingEntity.setName(dto.getName());
+        existingEntity.setTitle(dto.getTitle());
         existingEntity.setRating(dto.getRating());
        // existingEntity.setComment(dto.getComment());
         existingEntity.setYear(dto.getYear());
@@ -60,23 +61,24 @@ public class MovieServiceImpl implements MovieService {
         var result = movieRepo.save(existingEntity);
         return movieMapper.toDto(result);
     }
-
     @Override
-    public CommentDto addCommentByUser(UUID movieId, CommentDto dto) {
-        var movie = movieRepo.findById(movieId)
+    public CommentDto addComment(UUID movieId, CommentDto dto) {
+        MovieEntity movie = movieRepo.findById(movieId)
                 .orElseThrow(() -> new RuntimeException("Movie not found"));
 
-        var entity = commentMapper.toEntity(dto);
-        entity.setMovie(movie);
+        CommentEntity entity = commentMapper.toEntity(dto);
+        entity.setMovie(movie); // привязка к фильму
 
-        var saved = commentRepo.save(entity);
+        CommentEntity saved = commentRepo.save(entity);
         return commentMapper.toDto(saved);
     }
     @Override
+    public List<CommentDto> findByMovieId(UUID movieId) {
+        return commentMapper.toDtos(commentRepo.findByMovieId(movieId));
+    }
+    @Override
     public List<CommentDto> getComments(UUID movieId) {
-        var movie = movieRepo.findById(movieId)
-                .orElseThrow(() -> new RuntimeException("Movie not found"));
-        return commentMapper.toDtos(movie.getComments());
+        return commentMapper.toDtos(commentRepo.findByMovieId(movieId));
     }
 
 

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 @NoArgsConstructor
@@ -12,12 +13,11 @@ import java.util.UUID;
 public class MovieDto {
 
     private UUID id;
-    private String name;
+    private String title;
     private int year;
-    private double rating;
     private String description;
-    private List<CommentDto> comments;
-
+    private Double rating;
+    private List<CommentDto> comments = new ArrayList<>();
+}
     //картинка
 
-}

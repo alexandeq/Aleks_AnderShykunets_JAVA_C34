@@ -12,11 +12,12 @@ import java.util.UUID;
 public class CommentDto {
 
     private UUID id;
-
-    private UUID movieID;
     private String comment;
     private Integer rating;
-
+    private UUID movieId;
 
 
 }
+
+
+

@@ -20,7 +20,7 @@ public class MovieController {
         return  service.save(dto);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public List<MovieDto> getAll(){
         return service.findAll();
     }
@@ -28,19 +28,8 @@ public class MovieController {
     @GetMapping("/{id}")
     public MovieDto findById(@PathVariable UUID id) {
         return service.findById(id);
-    }
 
-    @PostMapping("/{id}/comments")
-    public CommentDto addComment(@PathVariable UUID id, @RequestBody CommentDto dto) {
-        return service.addCommentByUser(id, dto);
     }
-
-    // Получить все комментарии к фильму
-    @GetMapping("/{id}/comments")
-    public List<CommentDto> getComments(@PathVariable UUID id) {
-        return service.getComments(id);
-    }
-
 
     @PutMapping("/admin")
     public MovieDto update(@RequestParam UUID id, @RequestBody MovieDto dto) {

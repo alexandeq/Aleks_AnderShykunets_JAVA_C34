@@ -1,6 +1,7 @@
 package com.example.project_library.service.impl;
 
 import com.example.project_library.client.MovieClient;
+import com.example.project_library.dto.CommentDto;
 import com.example.project_library.dto.MovieDto;
 import com.example.project_library.service.MovieService;
 import lombok.RequiredArgsConstructor;
@@ -23,4 +24,6 @@ public class MovieServiceImpl implements MovieService {
     public MovieDto findById(UUID id) {
         return client.findById(id);
     }
+
+
 }

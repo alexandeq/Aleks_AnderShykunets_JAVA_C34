@@ -19,7 +19,6 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
     private final PersonRepository repo;
     private final PersonMapper mapper;
 
-
     @Override
     public PersonDto create(PersonDto dto) {
 
@@ -36,21 +35,17 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
 
     @Override
     public PersonDto findByUsername(String username) {
-
-        if (!repo.existsByUsername(username)) {
-            throw new UserCommonException(808102, "user with login: " + username + " - not found");
-        }
-        return mapper.toDto(repo.findByUsername(username));
-
+        var entity = repo.findByUsername(username)
+                .orElseThrow(() -> new UserCommonException(808102, "User not found with username: " + username));
+        return mapper.toDto(entity);
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return repo.findByUsername(username);
-            //.orElseThrow();
+        return repo.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
     }
 }
-
 
 
 

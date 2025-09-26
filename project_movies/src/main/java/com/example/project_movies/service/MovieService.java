@@ -20,6 +20,12 @@ public interface MovieService {
 
     List<CommentDto> getComments(UUID movieId);
 
-    CommentDto addCommentByUser(UUID movieId, CommentDto dto);
+    //List<CommentDto> getCommentsByMovie(UUID movieId);
+
+    CommentDto addComment(UUID movieId, CommentDto dto);
+
+    List<CommentDto> findByMovieId(UUID movieId);
+
+
 
 }

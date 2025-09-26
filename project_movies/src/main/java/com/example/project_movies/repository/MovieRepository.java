@@ -1,6 +1,5 @@
 package com.example.project_movies.repository;
 
-import com.example.project_movies.domain.CommentEntity;
 import com.example.project_movies.domain.MovieEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 

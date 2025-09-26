@@ -14,20 +14,14 @@ import java.util.UUID;
 @FeignClient(name = "movie-client", url = "http://localhost:8082", path = "/movie")
 public interface MovieClient {
 
-    @GetMapping
+    @GetMapping("/all")
     List<MovieDto> getAll();
 
     @GetMapping("/{id}")
-    MovieDto findById(@PathVariable("id") UUID id); //    MovieDto findById(@PathVariable UUID id);
+    MovieDto findById(@PathVariable UUID id); //    MovieDto findById(@PathVariable UUID id);
 
     @PostMapping
     MovieDto save(@RequestBody MovieDto dto);
-
-    @PostMapping("/{id}/comments")
-    CommentDto addComment(@PathVariable UUID id, @RequestBody CommentDto dto);
-
-    @GetMapping("/{id}/comments")
-    List<CommentDto> getComments(@PathVariable UUID id);
 
 
 }
