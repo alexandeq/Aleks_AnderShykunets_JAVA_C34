@@ -2,8 +2,10 @@ package com.example.project_movies.web;
 
 import com.example.project_movies.dto.CommentDto;
 import com.example.project_movies.dto.MovieDto;
+import com.example.project_movies.dto.MovieSearchDto;
 import com.example.project_movies.service.MovieService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
@@ -45,6 +47,13 @@ public class MovieController {
     public void delete(@PathVariable UUID id) {
         service.delete(id);
     }
+
+    @PostMapping("/search")
+    public List<MovieDto> search(@RequestParam("title") String title){
+        return service.findMovieByTitle(title);
+    }
+
+
 
 
 }

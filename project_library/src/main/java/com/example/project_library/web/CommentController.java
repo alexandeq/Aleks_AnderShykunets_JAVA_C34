@@ -23,22 +23,29 @@ public class CommentController {
     private final MovieService movieService;
 
     @GetMapping("/{id}")
-    public String getMovie() {
-//        MovieDto movie = movieService.findById(id);
-//        List<CommentDto> comments = service.getComments(id);
-//
-//        model.addAttribute("movie", movie);
-//        model.addAttribute("comments", comments);
-//        model.addAttribute("newComment", new CommentDto()); // для формы
-        return "admin"; // movie-details.html
+    public String getMovie(@PathVariable UUID id, Model model) {
+        MovieDto movie = movieService.findById(id);
+        List<CommentDto> comments = service.getComments(id);
+
+        model.addAttribute("movie", movie);
+        model.addAttribute("comments", comments);
+        model.addAttribute("newComment", new CommentDto());  // для формы
+        return "comment"; // movie-details.html
     }
 
     //
-    @PostMapping("/{id}/comment")
-    public String addComment(@PathVariable UUID id,
+    @PostMapping("/{movieId}/comment")
+    public String addComment(@PathVariable UUID movieId,
                              @ModelAttribute("newComment") CommentDto dto) {
-        service.addComment(id, dto);
-        return "redirect:/movie/user/" + id; // перезагрузка страницы фильма
+        service.addComment(movieId, dto);
+        return "redirect:/movie/user/" + movieId;
     }
 
 }
+//
+//    @PostMapping("/{movieId}/add")
+//    public String addComment(@PathVariable UUID movieId,
+//                             @ModelAttribute("comment") CommentDto dto) {
+//        commentService.addComment(movieId, dto);
+//        return "redirect:/comment/" + movieId; // редирект на список комментов фильма
+//    }

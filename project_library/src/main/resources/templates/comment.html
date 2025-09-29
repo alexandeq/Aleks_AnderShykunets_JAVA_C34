@@ -6,7 +6,7 @@
 <body>
 <h2 th:text="${movie.title}"></h2>
 <p><strong>Год:</strong> <span th:text="${movie.year}"></span></p>
-<p><strong>Рейтинг:</strong> <span th:text="${movie.rating}"></span></p>
+<p><strong>Средняя оценка:</strong> <span th:text="${movie.rating}"></span></p>
 <p><strong>Описание:</strong> <span th:text="${movie.description}"></span></p>
 
 <hr>
@@ -14,15 +14,15 @@
 <h3>Комментарии:</h3>
 <ul>
   <li th:each="comment : ${comments}">
-    <p><strong>Оценка:</strong> <span th:text="${comment.rating}"></span></p>
     <p th:text="${comment.comment}"></p>
+    <p><strong>Оценка:</strong> <span th:text="${comment.rating}"></span></p>
   </li>
 </ul>
 
 <hr>
 
 <h3>Оставить комментарий:</h3>
-<form th:action="@{'/movie/' + ${movie.id} + '/comment'}" method="post" th:object="${newComment}">
+<form th:action="@{'/movie/user/' + ${movie.id} + '/comment'}" method="post" th:object="${newComment}">
   <label>Комментарий:</label><br>
   <textarea th:field="*{comment}"></textarea><br>
   <label>Оценка:</label>

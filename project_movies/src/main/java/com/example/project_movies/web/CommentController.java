@@ -3,6 +3,7 @@ package com.example.project_movies.web;
 import com.example.project_movies.dto.CommentDto;
 import com.example.project_movies.service.MovieService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,12 +17,23 @@ public class CommentController {
     private final MovieService service;
 
     // POST /comments/{movieId}
-    @PostMapping("/{movieId}")
-    public CommentDto addComment(@PathVariable UUID movieId,
-                                 @RequestBody CommentDto dto) {
-        return service.addComment(movieId, dto);
-    }
+//    @PostMapping("/{id}/comment")
+//    public String addComment(@PathVariable UUID id,
+//                             @RequestParam String comment,
+//                             @RequestParam int rating) {
+//        service.addComment(id, comment, rating);
+//        return "redirect:/movie/" + id;
+//
+//    }
 
+    @PostMapping("/{id}/comment")
+    public ResponseEntity<CommentDto> addComment(
+            @PathVariable UUID id,
+            @RequestBody CommentDto dto) {
+
+        CommentDto saved = service.addComment(id, dto);
+        return ResponseEntity.ok(saved);
+    }
     // GET /comments/{movieId}
     @GetMapping("/{movieId}")
     public List<CommentDto> getComments(@PathVariable UUID movieId) {

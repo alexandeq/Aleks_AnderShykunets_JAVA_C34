@@ -1,5 +1,6 @@
 package com.example.project_movies.service;
 
+import com.example.project_movies.domain.CommentEntity;
 import com.example.project_movies.dto.CommentDto;
 import com.example.project_movies.dto.MovieDto;
 
@@ -20,12 +21,11 @@ public interface MovieService {
 
     List<CommentDto> getComments(UUID movieId);
 
-    //List<CommentDto> getCommentsByMovie(UUID movieId);
+    List<MovieDto> findMovieByTitle(String title);
 
-    CommentDto addComment(UUID movieId, CommentDto dto);
+    public CommentDto addComment(UUID movieId, CommentDto dto);
 
     List<CommentDto> findByMovieId(UUID movieId);
-
 
 
 }

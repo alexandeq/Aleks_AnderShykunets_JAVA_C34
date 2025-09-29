@@ -28,9 +28,10 @@ public class MovieEntity {
     //@Column(columnDefinition = "TEXT")
     private String description;
 
-    private Double rating; // Средний рейтинг, обновляется при добавлении комментариев
+    private double rating;
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<CommentEntity> comments = new ArrayList<>();
 
 }
+

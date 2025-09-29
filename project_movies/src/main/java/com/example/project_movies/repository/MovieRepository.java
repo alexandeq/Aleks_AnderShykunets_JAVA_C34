@@ -11,6 +11,6 @@ public interface MovieRepository extends JpaRepository<MovieEntity, UUID> {
 
     List<MovieEntity> findAll();
 
-   // List<CommentEntity> findAllByMovieId(UUID movieId);
+    List<MovieEntity> findMovieByTitle(String title);
 
 }

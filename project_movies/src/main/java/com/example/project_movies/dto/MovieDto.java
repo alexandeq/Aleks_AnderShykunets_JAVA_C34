@@ -16,7 +16,7 @@ public class MovieDto {
     private String title;
     private int year;
     private String description;
-    private Double rating;
+    private double rating;
     private List<CommentDto> comments = new ArrayList<>();
 }
     //картинка

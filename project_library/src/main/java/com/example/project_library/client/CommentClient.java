@@ -17,6 +17,7 @@ public interface CommentClient {
     @GetMapping("/{movieId}")
     List<CommentDto> getComments(@PathVariable("movieId") UUID movieId);
 
-    @PostMapping("/{movieId}")
+    @PostMapping("/{movieId}/comment")
     CommentDto addComment(@PathVariable("movieId") UUID movieId, @RequestBody CommentDto dto);
 }
+//

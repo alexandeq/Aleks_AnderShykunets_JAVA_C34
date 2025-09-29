@@ -13,5 +13,4 @@ public interface MovieService {
     MovieDto findById(UUID id);
 
 
-
 }

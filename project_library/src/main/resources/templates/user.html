@@ -6,12 +6,17 @@
 <body>
 <h2>Список фильмов</h2>
 
+<form action="/movie/user/search" method="post">
+  Поиск фильма: <input type="text" name="title">
+  <input type="submit" value="Поиск">
+</form>
+
 <table border="1">
   <tr>
     <th>Название</th>
     <th>Год</th>
     <th>Рейтинг</th>
-    <th>Действие</th>
+    <th>Детали</th>
   </tr>
   <tr th:each="movie : ${movies}">
     <td th:text="${movie.title}"></td>

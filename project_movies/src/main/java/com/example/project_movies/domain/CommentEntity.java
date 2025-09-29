@@ -21,13 +21,18 @@ public class CommentEntity {
     @UuidGenerator
     private UUID id;
 
-    @Column(columnDefinition = "TEXT")
     private String comment;
 
-    private Integer rating; // 1–10
+    private double rating;
 
 
     @ManyToOne
-    @JoinColumn(name = "movie_id")
+    @JoinColumn(name = "movie_id", nullable = false)
     private MovieEntity movie;
+
+    public CommentEntity(String comment, Integer rating, MovieEntity movie) {
+        this.comment = comment;
+        this.rating = rating;
+        this.movie = movie;
+    }
 }

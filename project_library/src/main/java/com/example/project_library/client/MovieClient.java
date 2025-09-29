@@ -3,10 +3,8 @@ package com.example.project_library.client;
 import com.example.project_library.dto.CommentDto;
 import com.example.project_library.dto.MovieDto;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -23,6 +21,8 @@ public interface MovieClient {
     @PostMapping
     MovieDto save(@RequestBody MovieDto dto);
 
+    @PostMapping("/search")
+    List<MovieDto> search(@RequestParam("title") String title);
 
 }
 //    @PutMapping("/admin")

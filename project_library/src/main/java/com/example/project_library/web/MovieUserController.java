@@ -1,22 +1,18 @@
 package com.example.project_library.web;
 import com.example.project_library.client.MovieClient;
-import com.example.project_library.dto.CommentDto;
 import com.example.project_library.dto.MovieDto;
+import com.example.project_library.dto.MovieSearchDto;
 import com.example.project_library.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.UUID;
-
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/movie")
 public class MovieUserController {
 
-    private final MovieService service;
     private final MovieClient client;
 
     @GetMapping("/user")
@@ -41,9 +37,13 @@ public class MovieUserController {
         return "admin";
     }
 
+    @PostMapping("/user/search")
+    public String search(MovieDto dto, Model model){
+        var result =  client.search(dto.getTitle());
 
-
-
+        model.addAttribute("movies", result);
+        return "user";
+    }
 
 
 }

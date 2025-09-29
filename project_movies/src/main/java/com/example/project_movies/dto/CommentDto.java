@@ -13,7 +13,7 @@ public class CommentDto {
 
     private UUID id;
     private String comment;
-    private Integer rating;
+    private double rating;
     private UUID movieId;
 
 
