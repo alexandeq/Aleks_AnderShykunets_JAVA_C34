@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Редактирование фильма</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f7f7f7;
+        margin: 0;
+        padding: 30px;
+    }
+    .container {
+        max-width: 600px;
+        margin: auto;
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    h2 {
+        text-align: center;
+    }
+    label {
+        display: block;
+        margin-top: 10px;
+        font-weight: bold;
+    }
+    input, textarea, select {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 15px;
+    }
+    textarea {
+        resize: vertical;
+    }
+    .buttons {
+        text-align: center;
+        margin-top: 20px;
+    }
+    button {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    button:hover {
+        background-color: #45a049;
+    }
+    a {
+        display: inline-block;
+        margin-top: 10px;
+        text-decoration: none;
+        color: #007bff;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Редактировать фильм</h2>
+
+  <form th:action="@{/movie/admin/update}" th:object="${movie}" method="post">
+    <input type="hidden" th:field="*{id}" />
+
+    <label>Название фильма:</label>
+    <input type="text" th:field="*{title}" required />
+
+    <label>Год выпуска:</label>
+    <input type="number" th:field="*{year}" required />
+
+    <label>Описание:</label>
+    <textarea th:field="*{description}" rows="4"></textarea>
+
+    <label>Средний рейтинг:</label>
+    <input type="number" th:field="*{rating}" step="0.1" min="0" max="10"/>
+
+    <div class="buttons">
+      <button type="submit">Сохранить изменения</button>
+    </div>
+  </form>
+
+  <div class="buttons">
+    <a th:href="@{/movie/admin}">← Назад к списку фильмов</a>
+  </div>
+</div>
+
+</body>
+</html>

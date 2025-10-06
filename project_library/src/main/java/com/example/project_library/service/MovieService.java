@@ -8,9 +8,15 @@ import java.util.UUID;
 
 public interface MovieService {
 
-    List<MovieDto> getMovies();
+    List<MovieDto> findAll();
 
     MovieDto findById(UUID id);
+
+    MovieDto create(MovieDto dto) ;
+
+    MovieDto update(UUID id, MovieDto dto);
+
+    void delete(UUID id) ;
 
 
 }

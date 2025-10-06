@@ -5,7 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
-@EnableFeignClients
+
+@EnableFeignClients(basePackages = "com.example.project_library.client")
 
 public class ProjectLibraryApplication {
 

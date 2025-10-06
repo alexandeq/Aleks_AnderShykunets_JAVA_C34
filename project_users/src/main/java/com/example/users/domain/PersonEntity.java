@@ -12,16 +12,18 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
-@Table(name = "persons")
 @Entity
+@Table(name = "persons")
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter @Setter
 public class PersonEntity implements UserDetails {
 
     @Id
@@ -34,13 +36,35 @@ public class PersonEntity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (authority == null || authority.isBlank()) {
+       if (authority == null || authority.isBlank()) {
             return List.of();
         }
 
-        return Arrays.stream(authority.split(","))
+       return Arrays.stream(authority.split(","))
                 .map(SimpleGrantedAuthority::new)
                 .toList();
     }
 
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() { return true; }
+
+    @Override
+    public boolean isAccountNonLocked() { return true; }
+
+    @Override
+    public boolean isCredentialsNonExpired() { return true; }
+
+    @Override
+    public boolean isEnabled() { return true; }
 }
+

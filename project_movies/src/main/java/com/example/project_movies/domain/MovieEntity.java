@@ -25,10 +25,13 @@ public class MovieEntity {
 
     private int year;
 
-    //@Column(columnDefinition = "TEXT")
     private String description;
 
     private double rating;
+
+    @Lob
+    @Column(columnDefinition = "bytea")
+    private byte[] poster;
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<CommentEntity> comments = new ArrayList<>();

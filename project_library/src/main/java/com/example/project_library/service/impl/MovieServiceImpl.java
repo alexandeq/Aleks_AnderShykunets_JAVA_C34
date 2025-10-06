@@ -16,7 +16,7 @@ public class MovieServiceImpl implements MovieService {
     private final MovieClient client;
 
     @Override
-    public List<MovieDto> getMovies() {
+    public List<MovieDto> findAll() {
       return client.getAll();
     }
 
@@ -25,5 +25,16 @@ public class MovieServiceImpl implements MovieService {
         return client.findById(id);
     }
 
-
+    @Override
+    public MovieDto create(MovieDto dto) {
+        return client.create(dto);
+    }
+    @Override
+    public MovieDto update(UUID id, MovieDto dto) {
+        return client.edit(id, dto);
+    }
+    @Override
+    public void delete(UUID id) {
+        client.delete(id);
+    }
 }

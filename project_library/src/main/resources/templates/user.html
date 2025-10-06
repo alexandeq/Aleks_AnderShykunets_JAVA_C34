@@ -7,7 +7,10 @@
 <h2>Список фильмов</h2>
 
 <form action="/movie/user/search" method="post">
-  Поиск фильма: <input type="text" name="title">
+  Поиск фильма: <input type="text" name="title"><br>
+  Поиск по году от: <input type="number" name="from"><br>
+  Поиск по году до: <input type="number" name="to"><br>
+  Оценка фильма: <input type="number" name="rating"><br>
   <input type="submit" value="Поиск">
 </form>
 
@@ -27,4 +30,6 @@
         <button>Выбрать</button>
       </a>
     </td>
+    </tr>
 
+</table>

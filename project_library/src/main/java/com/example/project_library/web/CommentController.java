@@ -18,7 +18,6 @@ import java.util.UUID;
 @RequestMapping("/movie/user")
 public class CommentController {
 
-    private final CommentClient client;
     private final CommentService service;
     private final MovieService movieService;
 
@@ -30,10 +29,9 @@ public class CommentController {
         model.addAttribute("movie", movie);
         model.addAttribute("comments", comments);
         model.addAttribute("newComment", new CommentDto());  // для формы
-        return "comment"; // movie-details.html
+        return "comment";
     }
 
-    //
     @PostMapping("/{movieId}/comment")
     public String addComment(@PathVariable UUID movieId,
                              @ModelAttribute("newComment") CommentDto dto) {
@@ -42,10 +40,3 @@ public class CommentController {
     }
 
 }
-//
-//    @PostMapping("/{movieId}/add")
-//    public String addComment(@PathVariable UUID movieId,
-//                             @ModelAttribute("comment") CommentDto dto) {
-//        commentService.addComment(movieId, dto);
-//        return "redirect:/comment/" + movieId; // редирект на список комментов фильма
-//    }

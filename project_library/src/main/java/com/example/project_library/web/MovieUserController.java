@@ -26,24 +26,7 @@ public class MovieUserController {
     public String test1() {
         return "roles";
     }
-
-    @GetMapping
-    public String test() {
-        return "roles";
-    }
-
-    @PostMapping("/admin")
-    public String admin() {
-        return "admin";
-    }
-
-    @PostMapping("/user/search")
-    public String search(MovieDto dto, Model model){
-        var result =  client.search(dto.getTitle());
-
-        model.addAttribute("movies", result);
-        return "user";
-    }
+    
 
 
 }

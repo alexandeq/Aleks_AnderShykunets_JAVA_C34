@@ -14,7 +14,7 @@ public interface CommentRepository extends JpaRepository<CommentEntity, UUID> {
 
     List<CommentEntity> findByMovieId(UUID movieId);
 
-    @Query("SELECT AVG(c.rating) FROM CommentEntity c WHERE c.movie.id = :movieId")
+    @Query("select avg(c.rating) from CommentEntity c where c.movie.id = :movieId")
     Double getAverageRatingByMovieId(@Param("movieId") UUID movieId);
 
 

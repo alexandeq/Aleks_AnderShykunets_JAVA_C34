@@ -3,6 +3,7 @@ import com.example.project_movies.domain.CommentEntity;
 import com.example.project_movies.domain.MovieEntity;
 import com.example.project_movies.dto.CommentDto;
 import com.example.project_movies.dto.MovieDto;
+import com.example.project_movies.dto.MovieSearchDto;
 import com.example.project_movies.exc.MovieCommonException;
 import com.example.project_movies.mapper.CommentMapper;
 import com.example.project_movies.mapper.MovieMapper;
@@ -10,11 +11,15 @@ import com.example.project_movies.mapper.MovieMapper;
 import com.example.project_movies.repository.CommentRepository;
 import com.example.project_movies.repository.MovieRepository;
 import com.example.project_movies.service.MovieService;
+import jakarta.persistence.criteria.Predicate;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,11 +33,10 @@ public class MovieServiceImpl implements MovieService {
     private final CommentMapper commentMapper;
 
 
-
     @Override
     public MovieDto save(MovieDto dto) {
         var entity = movieMapper.toEntity(dto);
-        var result =  movieRepo.save(entity);
+        var result = movieRepo.save(entity);
         return movieMapper.toDto(result);
     }
 
@@ -50,14 +54,12 @@ public class MovieServiceImpl implements MovieService {
     }
 
 
-
     @Override
-    public MovieDto updateByIdByAdmin(UUID id, MovieDto dto) {
+    public MovieDto editByIdByAdmin(UUID id, MovieDto dto) {
         var existingEntity = movieRepo.findById(id).get();
 
         existingEntity.setTitle(dto.getTitle());
         existingEntity.setRating(dto.getRating());
-       // existingEntity.setComment(dto.getComment());
         existingEntity.setYear(dto.getYear());
 
         var result = movieRepo.save(existingEntity);
@@ -77,10 +79,10 @@ public class MovieServiceImpl implements MovieService {
         Double avg = commentRepo.getAverageRatingByMovieId(movieId);
         if (avg != null) {
             BigDecimal bd = new BigDecimal(avg).setScale(1, RoundingMode.HALF_UP);
-             movie.setRating(bd.doubleValue());
-         } else {
-             movie.setRating(0.0);
-                }
+            movie.setRating(bd.doubleValue());
+        } else {
+            movie.setRating(0.0);
+        }
         movieRepo.save(movie);
 
         return commentMapper.toDto(saved);
@@ -97,8 +99,6 @@ public class MovieServiceImpl implements MovieService {
     }
 
 
-
-
     @Override
     public void delete(UUID id) {
         var entity = movieRepo.findById(id)
@@ -110,8 +110,44 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public List<MovieDto> findMovieByTitle(String title) {
-       var result =  movieRepo.findMovieByTitle(title);
-       return movieMapper.toDtos(result);
+    public List<MovieDto> search(MovieSearchDto dto) {
+
+        var specification = createSpecification(dto);
+        var all = movieRepo.findAll(specification);
+        return movieMapper.toDtos(all);
+
+    }
+
+    public static Specification<MovieEntity> createSpecification (MovieSearchDto dto){
+        return (root, query, builder) -> {
+
+            List<Predicate> predicates = new ArrayList<>();
+
+
+            if (StringUtils.isNotBlank(dto.getTitle())) {
+                predicates.add(builder.like(root.get("title"), "%" + dto.getTitle().toLowerCase() + "%"));
+            }
+
+
+            if (dto.getFrom() != null) {
+                predicates.add(builder.greaterThanOrEqualTo(root.get("year"), dto.getFrom()));
+            }
+
+
+            if (dto.getTo() != null) {
+                predicates.add(builder.lessThanOrEqualTo(root.get("year"), dto.getTo()));
+            }
+
+
+            if (dto.getRating() != null) {
+                predicates.add(builder.greaterThanOrEqualTo(root.get("rating"), dto.getRating()));
+            }
+
+            return builder.and(predicates.toArray(new Predicate[]{}));
+        };
     }
 }
+
+
+
+

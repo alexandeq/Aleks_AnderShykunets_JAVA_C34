@@ -18,8 +18,8 @@ public class MovieController {
     private final MovieService service;
 
     @PostMapping
-    public MovieDto save(@RequestBody MovieDto dto){
-        return  service.save(dto);
+    public MovieDto create(@RequestBody MovieDto dto){
+        return service.save(dto);
     }
 
     @GetMapping("/all")
@@ -33,27 +33,16 @@ public class MovieController {
 
     }
 
-    @PutMapping("/admin")
-    public MovieDto update(@RequestParam UUID id, @RequestBody MovieDto dto) {
-        return service.updateByIdByAdmin(id, dto);
+    @PutMapping("/{id}")
+    public MovieDto edit(@PathVariable("id") UUID id, @RequestBody MovieDto dto) {
+        return service.editByIdByAdmin(id, dto);
     }
 
-//    @PutMapping("/user")
-//    public MovieDto sendComment(@RequestParam UUID id, @RequestBody MovieDto dto) {
-//        return service.sendCommentByUser(id, dto);
-//    }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable UUID id) {
         service.delete(id);
     }
-
-    @PostMapping("/search")
-    public List<MovieDto> search(@RequestParam("title") String title){
-        return service.findMovieByTitle(title);
-    }
-
-
 
 
 }

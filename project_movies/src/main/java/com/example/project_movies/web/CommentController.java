@@ -16,15 +16,6 @@ public class CommentController {
 
     private final MovieService service;
 
-    // POST /comments/{movieId}
-//    @PostMapping("/{id}/comment")
-//    public String addComment(@PathVariable UUID id,
-//                             @RequestParam String comment,
-//                             @RequestParam int rating) {
-//        service.addComment(id, comment, rating);
-//        return "redirect:/movie/" + id;
-//
-//    }
 
     @PostMapping("/{id}/comment")
     public ResponseEntity<CommentDto> addComment(
@@ -34,7 +25,7 @@ public class CommentController {
         CommentDto saved = service.addComment(id, dto);
         return ResponseEntity.ok(saved);
     }
-    // GET /comments/{movieId}
+
     @GetMapping("/{movieId}")
     public List<CommentDto> getComments(@PathVariable UUID movieId) {
         return service.getComments(movieId);
