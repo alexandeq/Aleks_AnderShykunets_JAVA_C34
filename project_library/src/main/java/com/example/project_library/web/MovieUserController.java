@@ -1,8 +1,5 @@
 package com.example.project_library.web;
-import com.example.project_library.client.MovieClient;
-import com.example.project_library.dto.MovieDto;
-import com.example.project_library.dto.MovieSearchDto;
-import com.example.project_library.service.MovieService;
+import com.example.project_library.client.MovieUserClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/movie")
 public class MovieUserController {
 
-    private final MovieClient client;
+    private final MovieUserClient client;
 
     @GetMapping("/user")
     public String getAllMovies(Model model) {

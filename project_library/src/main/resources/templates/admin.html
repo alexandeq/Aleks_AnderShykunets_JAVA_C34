@@ -12,6 +12,7 @@
         .btn-create { background: green; }
         .btn-edit { background: dodgerblue; }
         .btn-delete { background: crimson; }
+        .btn-poster { background: orange; }
     </style>
 </head>
 <body>
@@ -42,6 +43,9 @@
             </form>
             <form th:action="@{/movie/admin/delete/{id}(id=${movie.id})}" method="post" style="display:inline;">
                 <button class="btn btn-delete">Удалить</button>
+            </form>
+            <form th:action="@{'/movie/' + ${movie.id} + '/poster'}" method="get" style="display:inline;">
+                <button class="btn btn-poster">Добавить постер</button>
             </form>
         </td>
     </tr>

@@ -1,10 +1,10 @@
 package com.example.project_library.web;
 
-import com.example.project_library.client.CommentClient;
 import com.example.project_library.dto.CommentDto;
 import com.example.project_library.dto.MovieDto;
 import com.example.project_library.service.CommentService;
-import com.example.project_library.service.MovieService;
+import com.example.project_library.service.MovieAdminService;
+import com.example.project_library.service.MovieUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,11 +19,12 @@ import java.util.UUID;
 public class CommentController {
 
     private final CommentService service;
-    private final MovieService movieService;
+    private final MovieUserService movieUserService;
+    private final MovieAdminService movieAdminService;
 
     @GetMapping("/{id}")
     public String getMovie(@PathVariable UUID id, Model model) {
-        MovieDto movie = movieService.findById(id);
+        MovieDto movie = movieAdminService.findById(id);
         List<CommentDto> comments = service.getComments(id);
 
         model.addAttribute("movie", movie);

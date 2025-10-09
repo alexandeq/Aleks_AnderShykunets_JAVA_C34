@@ -1,22 +1,27 @@
 package com.example.project_movies.service.impl;
 import com.example.project_movies.domain.CommentEntity;
 import com.example.project_movies.domain.MovieEntity;
+import com.example.project_movies.domain.PosterEntity;
 import com.example.project_movies.dto.CommentDto;
 import com.example.project_movies.dto.MovieDto;
 import com.example.project_movies.dto.MovieSearchDto;
+import com.example.project_movies.dto.PosterDto;
 import com.example.project_movies.exc.MovieCommonException;
 import com.example.project_movies.mapper.CommentMapper;
 import com.example.project_movies.mapper.MovieMapper;
 
 import com.example.project_movies.repository.CommentRepository;
 import com.example.project_movies.repository.MovieRepository;
+import com.example.project_movies.repository.PosterRepository;
 import com.example.project_movies.service.MovieService;
 import jakarta.persistence.criteria.Predicate;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -31,7 +36,45 @@ public class MovieServiceImpl implements MovieService {
     private final CommentRepository commentRepo;
     private final MovieMapper movieMapper;
     private final CommentMapper commentMapper;
+    private final PosterRepository posterRepo;
 
+    // Добавление или обновление постера
+    public PosterDto addOrUpdatePoster(UUID movieId, MultipartFile posterFile) throws IOException {
+        MovieEntity movie = movieRepo.findById(movieId)
+                .orElseThrow(() -> new MovieCommonException(808201, "Movie not found"));
+
+        PosterEntity poster = posterRepo.findByMovieId(movieId).orElseGet(() -> {
+            PosterEntity p = new PosterEntity();
+            p.setMovie(movie);
+            return p;
+        });
+
+        try {
+            poster.setImage(posterFile.getBytes()); // ✅ byte[]
+        } catch (IOException e) {
+            throw new MovieCommonException(808208, "Failed to read poster file");
+        }
+
+        System.out.println("posterFile.getClass(): " + posterFile.getClass());
+        System.out.println("posterFile.getSize(): " + posterFile.getSize());
+        System.out.println("posterFile.getBytes() length: " + posterFile.getBytes().length);
+
+
+
+        PosterEntity savedPoster = posterRepo.save(poster);
+
+        return PosterDto.builder()
+                .id(savedPoster.getId())
+                .posterUrl("/movie/" + movieId + "/poster")
+                .build();
+    }
+
+    // Получение постера по фильму
+    public byte[] getPoster(UUID movieId) {
+        PosterEntity poster = posterRepo.findByMovieId(movieId)
+                .orElseThrow(() -> new MovieCommonException(808209, "Poster not found"));
+        return poster.getImage();
+    }
 
     @Override
     public MovieDto save(MovieDto dto) {
@@ -69,7 +112,7 @@ public class MovieServiceImpl implements MovieService {
     public CommentDto addComment(UUID movieId, CommentDto dto) {
 
         var movie = movieRepo.findById(movieId)
-                .orElseThrow(() -> new RuntimeException("Movie not found:"));
+                .orElseThrow(() -> new MovieCommonException(808201, "Movie not found:"));
 
         var entity = commentMapper.toEntity(dto);
         entity.setMovie(movie);
@@ -102,7 +145,7 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public void delete(UUID id) {
         var entity = movieRepo.findById(id)
-                .orElseThrow(() -> new MovieCommonException(808201, " delete failed: movie with this ID not found"));
+                .orElseThrow(() -> new MovieCommonException(808202, " delete failed: movie with this ID not found"));
 
         movieRepo.delete(entity);
 
@@ -117,6 +160,7 @@ public class MovieServiceImpl implements MovieService {
         return movieMapper.toDtos(all);
 
     }
+
 
     public static Specification<MovieEntity> createSpecification (MovieSearchDto dto){
         return (root, query, builder) -> {

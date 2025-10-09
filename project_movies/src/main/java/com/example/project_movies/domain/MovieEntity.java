@@ -1,8 +1,8 @@
 package com.example.project_movies.domain;
 
-import com.example.project_movies.dto.CommentDto;
 import jakarta.persistence.*;
 import lombok.*;
+import jakarta.persistence.Lob;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.util.ArrayList;
@@ -29,9 +29,8 @@ public class MovieEntity {
 
     private double rating;
 
-    @Lob
-    @Column(columnDefinition = "bytea")
-    private byte[] poster;
+    @OneToOne(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private PosterEntity poster;
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<CommentEntity> comments = new ArrayList<>();

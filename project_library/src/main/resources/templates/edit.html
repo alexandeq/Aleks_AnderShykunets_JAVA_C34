@@ -81,6 +81,9 @@
     <label>Средний рейтинг:</label>
     <input type="number" th:field="*{rating}" step="0.1" min="0" max="10"/>
 
+    <img th:src="@{/movies/{id}/poster(id=${movie.id})}" alt="Poster" width="200">
+
+
     <div class="buttons">
       <button type="submit">Сохранить изменения</button>
     </div>

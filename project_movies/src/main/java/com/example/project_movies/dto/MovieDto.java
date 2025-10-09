@@ -17,7 +17,10 @@ public class MovieDto {
     private int year;
     private String description;
     private double rating;
+
+    private String posterUrl;
+
     private List<CommentDto> comments = new ArrayList<>();
 }
-    //картинка
+
 

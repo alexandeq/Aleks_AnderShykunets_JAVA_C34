@@ -11,6 +11,9 @@
 
 <hr>
 
+<img th:src="@{/movies/{id}/poster(id=${movie.id})}" alt="Poster" width="200">
+
+
 <h3>Комментарии:</h3>
 <ul>
   <li th:each="comment : ${comments}">

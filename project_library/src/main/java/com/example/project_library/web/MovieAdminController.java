@@ -1,13 +1,20 @@
 package com.example.project_library.web;
 
-import com.example.project_library.client.MovieClient;
 import com.example.project_library.dto.MovieDto;
-import com.example.project_library.service.MovieService;
+import com.example.project_library.dto.PosterDto;
+import com.example.project_library.service.MovieAdminService;
+import com.example.project_library.service.MovieUserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.UUID;
 
 @Controller
@@ -15,11 +22,12 @@ import java.util.UUID;
 @RequestMapping("/movie/admin")
 public class MovieAdminController {
 
-    private final MovieService service;
+    private final MovieAdminService service;
+    private final MovieUserService userService;
 
     @GetMapping
     public String getAll(Model model) {
-        model.addAttribute("movies", service.findAll());
+        model.addAttribute("movies", userService.findAll());
         return "admin";
     }
 
@@ -52,4 +60,38 @@ public class MovieAdminController {
         service.update(dto.getId(), dto);
         return "redirect:/movie/admin";
     }
+
+
+    /**
+     * Форма для загрузки постера
+     */
+    @GetMapping("/{id}/poster")
+    public String showPosterForm(@PathVariable UUID id, Model model) {
+        model.addAttribute("movieId", id);
+        return "poster";
+    }
+
+    /**
+     * Обработчик загрузки постера
+     */
+    @PostMapping("/{id}/poster")
+    public String uploadPoster(
+            @PathVariable UUID id,
+            @RequestParam("poster") MultipartFile poster,
+            Model model
+    ) throws IOException {
+        PosterDto savedPoster = service.addPoster(id, poster);
+        model.addAttribute("posterUrl", savedPoster.getPosterUrl());
+        model.addAttribute("movieId", id);
+        model.addAttribute("message", "Постер успешно загружен!");
+        return "poster-upload-success"; // Thymeleaf-шаблон результата
+    }
+
+
+    @GetMapping("/{id}/poster/image")
+    @ResponseBody
+    public byte[] getPosterImage(@PathVariable UUID id) {
+        return service.getPoster(id);
+    }
 }
+

@@ -11,17 +11,12 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface CommentMapper {
 
-    @Mapping(source = "movie.id", target = "movieId")  // берём id из movie
+    @Mapping(source = "movie.id", target = "movieId")
     CommentDto toDto(CommentEntity entity);
 
-    @Mapping(source = "movieId", target = "movie.id")  // кладём id в movie
+    @Mapping(source = "movieId", target = "movie.id")
     CommentEntity toEntity(CommentDto dto);
 
     List<CommentDto> toDtos(List<CommentEntity> entities);
 
-   //List<CommentEntity> toEntities(List<CommentDto> dtos);
-
-
-
-
-    }
+}

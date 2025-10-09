@@ -19,5 +19,6 @@ public class MovieDto {
     private int year;
     private double rating;
     private String description;
+    private byte[] poster;
     private List<CommentDto> comments = new ArrayList<>();
 }
