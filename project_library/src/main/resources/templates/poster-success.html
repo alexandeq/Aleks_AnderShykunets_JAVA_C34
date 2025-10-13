@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Постер загружен</title>
+</head>
+<body>
+<h2 th:text="${message}"></h2>
+<img th:src="${posterUrl}" alt="Постер фильма" style="max-width:300px; border-radius:10px;">
+<br><br>
+<a th:href="@{/movie/admin}">⬅ Назад к списку фильмов</a>
+</body>
+</html>
+

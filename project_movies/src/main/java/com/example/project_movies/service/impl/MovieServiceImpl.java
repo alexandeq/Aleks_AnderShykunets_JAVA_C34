@@ -19,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -38,7 +39,6 @@ public class MovieServiceImpl implements MovieService {
     private final CommentMapper commentMapper;
     private final PosterRepository posterRepo;
 
-    // Добавление или обновление постера
     public PosterDto addOrUpdatePoster(UUID movieId, MultipartFile posterFile) throws IOException {
         MovieEntity movie = movieRepo.findById(movieId)
                 .orElseThrow(() -> new MovieCommonException(808201, "Movie not found"));
@@ -55,12 +55,6 @@ public class MovieServiceImpl implements MovieService {
             throw new MovieCommonException(808208, "Failed to read poster file");
         }
 
-        System.out.println("posterFile.getClass(): " + posterFile.getClass());
-        System.out.println("posterFile.getSize(): " + posterFile.getSize());
-        System.out.println("posterFile.getBytes() length: " + posterFile.getBytes().length);
-
-
-
         PosterEntity savedPoster = posterRepo.save(poster);
 
         return PosterDto.builder()
@@ -69,11 +63,25 @@ public class MovieServiceImpl implements MovieService {
                 .build();
     }
 
-    // Получение постера по фильму
-    public byte[] getPoster(UUID movieId) {
-        PosterEntity poster = posterRepo.findByMovieId(movieId)
-                .orElseThrow(() -> new MovieCommonException(808209, "Poster not found"));
-        return poster.getImage();
+
+
+    @Override
+    public MovieDto getMovieDetails(UUID movieId) {
+        MovieEntity entity = movieRepo.findById(movieId)
+                .orElseThrow(() -> new MovieCommonException(808202, "Movie not found"));
+
+        MovieDto dto = movieMapper.toDto(entity);
+
+        PosterEntity poster = posterRepo.findByMovieId(movieId).orElse(null);
+        if (poster != null && poster.getImage() != null) {
+
+            dto.setPosterUrl("/movie/" + movieId + "/poster");
+        }
+
+        List<CommentDto> comments = commentMapper.toDtos(commentRepo.findByMovieId(movieId));
+        dto.setComments(comments);
+
+        return dto;
     }
 
     @Override
@@ -88,13 +96,40 @@ public class MovieServiceImpl implements MovieService {
         return movieMapper.toDtos(movieRepo.findAll());
     }
 
+
     @Override
     public MovieDto findById(UUID id) {
-        var entity = movieRepo.findById(id)
-                .orElseThrow(() -> new MovieCommonException(808202, "Movie with this ID not found"));
+        MovieEntity entity = movieRepo.findById(id)
+                .orElseThrow(() -> new MovieCommonException(808202, "Movie not found"));
 
-        return movieMapper.toDto(entity);
+        MovieDto dto = movieMapper.toDto(entity);
+
+        PosterEntity poster = posterRepo.findByMovieId(id).orElse(null);
+        if (poster != null) {
+            dto.setPosterUrl("/movie/" + id + "/poster");
+        }
+
+        return dto;
     }
+
+
+
+    @Override
+    public byte[] getPoster(UUID movieId) {
+        return posterRepo.findByMovieId(movieId)
+                .map(PosterEntity::getImage)
+                .orElse(null);
+    }
+
+
+
+//    @Override
+//    public MovieDto findById(UUID id) {
+//        var entity = movieRepo.findById(id)
+//                .orElseThrow(() -> new MovieCommonException(808202, "Movie with this ID not found"));
+//
+//        return movieMapper.toDto(entity);
+//    }
 
 
     @Override
@@ -108,17 +143,19 @@ public class MovieServiceImpl implements MovieService {
         var result = movieRepo.save(existingEntity);
         return movieMapper.toDto(result);
     }
-
+    @Override
+    @Transactional
     public CommentDto addComment(UUID movieId, CommentDto dto) {
-
         var movie = movieRepo.findById(movieId)
-                .orElseThrow(() -> new MovieCommonException(808201, "Movie not found:"));
+                .orElseThrow(() -> new MovieCommonException(808201, "Movie not found"));
 
         var entity = commentMapper.toEntity(dto);
+        entity.setId(null); // ✅ новая сущность
         entity.setMovie(movie);
 
-        var saved = commentRepo.save(entity);
+        var saved = commentRepo.saveAndFlush(entity); // ✅ сразу записываем в БД
 
+        // 🔹 обновляем рейтинг фильма
         Double avg = commentRepo.getAverageRatingByMovieId(movieId);
         if (avg != null) {
             BigDecimal bd = new BigDecimal(avg).setScale(1, RoundingMode.HALF_UP);
@@ -126,15 +163,17 @@ public class MovieServiceImpl implements MovieService {
         } else {
             movie.setRating(0.0);
         }
-        movieRepo.save(movie);
+
+        movieRepo.save(movie); // ✅ теперь Hibernate не трогает комментарии
 
         return commentMapper.toDto(saved);
     }
 
-    @Override
-    public List<CommentDto> findByMovieId(UUID movieId) {
-        return commentMapper.toDtos(commentRepo.findByMovieId(movieId));
-    }
+
+//    @Override
+//    public List<CommentDto> findByMovieId(UUID movieId) {
+//        return commentMapper.toDtos(commentRepo.findByMovieId(movieId));
+//    }
 
     @Override
     public List<CommentDto> getComments(UUID movieId) {

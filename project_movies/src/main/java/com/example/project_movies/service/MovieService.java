@@ -28,15 +28,13 @@ public interface MovieService {
 
     CommentDto addComment(UUID movieId, CommentDto dto);
 
-    List<CommentDto> findByMovieId(UUID movieId);
-
     List<MovieDto> search(MovieSearchDto dto);
-
-    PosterDto addOrUpdatePoster(UUID movieId, MultipartFile posterFile) throws IOException;
 
     byte[] getPoster(UUID movieId);
 
+    MovieDto getMovieDetails(UUID movieId);
 
+    PosterDto addOrUpdatePoster(UUID movieId, MultipartFile posterFile) throws IOException;
 
 
 

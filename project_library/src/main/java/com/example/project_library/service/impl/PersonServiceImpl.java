@@ -13,15 +13,6 @@ public class PersonServiceImpl implements PersonService {
 
     private final PersonClient client;
 
-//    @Override
-//    public PersonDto create(PersonDto dto) {
-//        return client.create(dto);
-//    }
-
-//    @Override
-//    public PersonDto find(String username) {
-//        return client.findByUsername(username);
-//    }
 
 }
 

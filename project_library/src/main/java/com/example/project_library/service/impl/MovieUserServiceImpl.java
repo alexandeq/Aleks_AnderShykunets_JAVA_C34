@@ -4,6 +4,7 @@ import com.example.project_library.client.MovieUserClient;
 import com.example.project_library.dto.MovieDto;
 import com.example.project_library.service.MovieUserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +20,10 @@ public class MovieUserServiceImpl implements MovieUserService {
     public List<MovieDto> findAll() {
       return client.getAll();
     }
-
+    @Override
+    public ResponseEntity<byte[]> getPoster(UUID id) {
+        return client.getPoster(id);
+    }
 
 
 

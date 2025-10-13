@@ -6,6 +6,8 @@ import com.example.project_library.service.CommentService;
 import com.example.project_library.service.MovieAdminService;
 import com.example.project_library.service.MovieUserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,25 +21,29 @@ import java.util.UUID;
 public class CommentController {
 
     private final CommentService service;
-    private final MovieUserService movieUserService;
-    private final MovieAdminService movieAdminService;
 
-    @GetMapping("/{id}")
-    public String getMovie(@PathVariable UUID id, Model model) {
-        MovieDto movie = movieAdminService.findById(id);
-        List<CommentDto> comments = service.getComments(id);
+        @GetMapping("/{id}")
+        public String getMovieDetails(@PathVariable UUID id, Model model) {
+            MovieDto movie = service.getMovieDetails(id); // 🟢 получаем фильм + постер + комментарии
+            model.addAttribute("movie", movie);
+            model.addAttribute("comments", movie.getComments());
+            model.addAttribute("newComment", new CommentDto());
+            System.out.println(movie.getPosterUrl());
+            return "comment"; // имя шаблона
+        }
 
-        model.addAttribute("movie", movie);
-        model.addAttribute("comments", comments);
-        model.addAttribute("newComment", new CommentDto());  // для формы
-        return "comment";
-    }
 
     @PostMapping("/{movieId}/comment")
     public String addComment(@PathVariable UUID movieId,
-                             @ModelAttribute("newComment") CommentDto dto) {
-        service.addComment(movieId, dto);
-        return "redirect:/movie/user/" + movieId;
+                             @ModelAttribute CommentDto commentDto) {
+
+        service.addComment(movieId, commentDto);
+        return "redirect:/movie/user/" + movieId; // обновляем страницу
     }
 
+
 }
+
+
+
+

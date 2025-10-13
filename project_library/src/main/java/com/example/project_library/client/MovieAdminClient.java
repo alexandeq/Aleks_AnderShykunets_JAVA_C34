@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.UUID;
-@FeignClient(name = "movie-admin-client", url = "http://localhost:8082", path = "/movie")
+@FeignClient(name = "movie-admin-client", url = "http://localhost:8082", path = "/movie/admin")
 public interface MovieAdminClient {
 
     @PostMapping
@@ -26,12 +26,20 @@ public interface MovieAdminClient {
     @GetMapping("/{id}")
     MovieDto findById(@PathVariable UUID id);
 
-    @PostMapping("/{id}/poster")
-    ResponseEntity<PosterDto> addPoster(
-            @PathVariable UUID id,
-            @RequestParam("poster") MultipartFile poster);
+
+//    @PostMapping(value = "/{id}/poster", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+//    ResponseEntity<PosterDto> addPoster(
+//            @PathVariable("id") UUID movieId,
+//            @RequestPart("poster") MultipartFile posterFile);
+
 
     @GetMapping("/{id}/poster")
-    ResponseEntity<byte[]> getPoster(@PathVariable UUID id);
+    ResponseEntity<byte[]> getPosterByAdmin(@PathVariable UUID id);
 
-}
+
+        @PostMapping("/{id}/poster")
+        ResponseEntity<PosterDto> addPoster (
+                @PathVariable UUID id,
+                @RequestParam("poster") MultipartFile poster);
+    }
+

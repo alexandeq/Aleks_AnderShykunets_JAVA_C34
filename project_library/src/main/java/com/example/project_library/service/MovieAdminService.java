@@ -24,7 +24,8 @@ public interface MovieAdminService {
 
     PosterDto addPoster(UUID movieId, MultipartFile posterFile) throws IOException;
 
-    byte[] getPoster(UUID movieId);
+    byte[] getPosterByAdmin(UUID movieId);
+
 
 
 

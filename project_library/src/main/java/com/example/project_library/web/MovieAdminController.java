@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -62,18 +63,13 @@ public class MovieAdminController {
     }
 
 
-    /**
-     * Форма для загрузки постера
-     */
     @GetMapping("/{id}/poster")
     public String showPosterForm(@PathVariable UUID id, Model model) {
         model.addAttribute("movieId", id);
         return "poster";
     }
 
-    /**
-     * Обработчик загрузки постера
-     */
+
     @PostMapping("/{id}/poster")
     public String uploadPoster(
             @PathVariable UUID id,
@@ -84,14 +80,15 @@ public class MovieAdminController {
         model.addAttribute("posterUrl", savedPoster.getPosterUrl());
         model.addAttribute("movieId", id);
         model.addAttribute("message", "Постер успешно загружен!");
-        return "poster-upload-success"; // Thymeleaf-шаблон результата
+        return "poster";
     }
 
 
     @GetMapping("/{id}/poster/image")
     @ResponseBody
     public byte[] getPosterImage(@PathVariable UUID id) {
-        return service.getPoster(id);
+        return service.getPosterByAdmin(id);
     }
+
 }
 

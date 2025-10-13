@@ -1,9 +1,15 @@
 package com.example.project_library.web;
 import com.example.project_library.client.MovieUserClient;
+import com.example.project_library.service.CommentService;
+import com.example.project_library.service.MovieUserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor
@@ -11,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 public class MovieUserController {
 
     private final MovieUserClient client;
+    private final MovieUserService movieUserService;
+    private final CommentService service;
 
     @GetMapping("/user")
     public String getAllMovies(Model model) {
@@ -20,14 +28,23 @@ public class MovieUserController {
     }
 
     @PostMapping
-    public String test1() {
+    public String role() {
         return "roles";
     }
-    
 
+    @GetMapping("/{id}/poster")
+    public ResponseEntity<byte[]> getPoster(@PathVariable UUID id) {
+        // Через Feign достаём картинку из BL
+        ResponseEntity<byte[]> response = movieUserService.getPoster(id);
+        if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
+            return ResponseEntity.ok()
+                    .contentType(MediaType.IMAGE_JPEG) // обязательно JPEG
+                    .body(response.getBody());
+        }
+        return ResponseEntity.notFound().build();
+    }
 
 }
-
 
 
 

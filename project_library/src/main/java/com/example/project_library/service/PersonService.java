@@ -6,7 +6,4 @@ import org.springframework.stereotype.Service;
 @Service
 public interface PersonService  {
 
-    //PersonDto create(PersonDto dto);
-
-    //PersonDto find(String username);
 }

@@ -18,11 +18,10 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/movie")
+@RequestMapping("/movie/admin")
 public class MovieAdminController {
 
     private final MovieService service;
-    private final ObjectMapper objectMapper;
 
 
     @PostMapping
@@ -41,6 +40,7 @@ public class MovieAdminController {
         service.delete(id);
     }
 
+
     @PostMapping("/{id}/poster")
     public ResponseEntity<PosterDto> addPoster(
             @PathVariable UUID id,
@@ -51,7 +51,7 @@ public class MovieAdminController {
     }
 
     @GetMapping("/{id}/poster")
-    public ResponseEntity<byte[]> getPoster(@PathVariable UUID id) {
+    public ResponseEntity<byte[]> getPosterByAdmin(@PathVariable UUID id) {
         byte[] image = service.getPoster(id);
         return ResponseEntity.ok()
                 .contentType(MediaType.IMAGE_JPEG)

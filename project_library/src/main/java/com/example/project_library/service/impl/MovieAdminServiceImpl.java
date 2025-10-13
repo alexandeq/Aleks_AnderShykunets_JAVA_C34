@@ -37,35 +37,17 @@ public class MovieAdminServiceImpl implements MovieAdminService {
         return client.findById(id);
     }
 
-//    @Override
-//    public ResponseEntity<byte[]> getPoster(UUID id) {
-//        return client.getPoster(id);
-//    }
-//
-//    @Override
-//    public ResponseEntity<PosterDto> addPoster(UUID id, MultipartFile poster) {
-//        return client.addPoster(id, poster);
-//    }
-
-
     @Override
     public PosterDto addPoster(UUID movieId, MultipartFile posterFile) throws IOException {
         ResponseEntity<PosterDto> response = client.addPoster(movieId, posterFile);
-        PosterDto dto = response.getBody();
-        if (dto == null) {
-            throw new RuntimeException("Poster not found after upload for movieId: " + movieId);
-        }
-        return dto;
+        return response.getBody();
     }
 
     @Override
-    public byte[] getPoster(UUID movieId) {
-        // Берём тело ответа из ResponseEntity
-        ResponseEntity<byte[]> response = client.getPoster(movieId);
-        if (response.getBody() == null) {
-            throw new RuntimeException("Poster not found for movieId: " + movieId);
-        }
+    public byte[] getPosterByAdmin(UUID movieId) {
+        ResponseEntity<byte[]> response = client.getPosterByAdmin(movieId);
         return response.getBody();
     }
+
 
 }
