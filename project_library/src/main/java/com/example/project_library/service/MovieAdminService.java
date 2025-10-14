@@ -22,9 +22,10 @@ public interface MovieAdminService {
 
     MovieDto findById(UUID id);
 
-    PosterDto addPoster(UUID movieId, MultipartFile posterFile) throws IOException;
+//    PosterDto addPoster(UUID movieId, MultipartFile posterFile) throws IOException;
+//
+//    ResponseEntity<byte[]> getPoster(UUID id);
 
-    byte[] getPosterByAdmin(UUID movieId);
 
 
 

@@ -4,6 +4,7 @@ import com.example.project_library.dto.MovieDto;
 import com.example.project_library.dto.PosterDto;
 import com.example.project_library.service.MovieAdminService;
 import com.example.project_library.service.MovieUserService;
+import com.example.project_library.service.PosterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,7 @@ public class MovieAdminController {
 
     private final MovieAdminService service;
     private final MovieUserService userService;
+    private final PosterService posterService;
 
     @GetMapping
     public String getAll(Model model) {
@@ -63,32 +65,26 @@ public class MovieAdminController {
     }
 
 
-    @GetMapping("/{id}/poster")
-    public String showPosterForm(@PathVariable UUID id, Model model) {
-        model.addAttribute("movieId", id);
-        return "poster";
-    }
-
-
     @PostMapping("/{id}/poster")
-    public String uploadPoster(
-            @PathVariable UUID id,
-            @RequestParam("poster") MultipartFile poster,
-            Model model
-    ) throws IOException {
-        PosterDto savedPoster = service.addPoster(id, poster);
-        model.addAttribute("posterUrl", savedPoster.getPosterUrl());
+    public String uploadPoster(@PathVariable UUID id, @RequestParam("poster") MultipartFile poster, Model model) throws IOException {
+        PosterDto savedPoster = posterService.addPoster(id, poster);
+        model.addAttribute("posterUrl", "/movie/admin/" + id + "/poster");
         model.addAttribute("movieId", id);
         model.addAttribute("message", "Постер успешно загружен!");
         return "poster";
     }
 
 
-    @GetMapping("/{id}/poster/image")
-    @ResponseBody
-    public byte[] getPosterImage(@PathVariable UUID id) {
-        return service.getPosterByAdmin(id);
+
+
+    @GetMapping("/{id}/poster")
+    public String poster(@PathVariable UUID id, Model model) {
+        model.addAttribute("movieId", id);
+        return "poster";
     }
 
+
 }
+
+
 

@@ -15,7 +15,6 @@ public interface MovieUserClient {
     @GetMapping("/all")
     List<MovieDto> getAll();
 
-
     @GetMapping("/{id}/poster")
     ResponseEntity<byte[]> getPoster(@PathVariable("id") UUID movieId);
 

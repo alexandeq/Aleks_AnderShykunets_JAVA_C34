@@ -1,5 +1,4 @@
 package com.example.project_movies.service.impl;
-import com.example.project_movies.domain.CommentEntity;
 import com.example.project_movies.domain.MovieEntity;
 import com.example.project_movies.domain.PosterEntity;
 import com.example.project_movies.dto.CommentDto;
@@ -39,7 +38,7 @@ public class MovieServiceImpl implements MovieService {
     private final CommentMapper commentMapper;
     private final PosterRepository posterRepo;
 
-    public PosterDto addOrUpdatePoster(UUID movieId, MultipartFile posterFile) throws IOException {
+    public PosterDto addPoster(UUID movieId, MultipartFile posterFile) throws IOException {
         MovieEntity movie = movieRepo.findById(movieId)
                 .orElseThrow(() -> new MovieCommonException(808201, "Movie not found"));
 
@@ -143,6 +142,7 @@ public class MovieServiceImpl implements MovieService {
         var result = movieRepo.save(existingEntity);
         return movieMapper.toDto(result);
     }
+
     @Override
     @Transactional
     public CommentDto addComment(UUID movieId, CommentDto dto) {

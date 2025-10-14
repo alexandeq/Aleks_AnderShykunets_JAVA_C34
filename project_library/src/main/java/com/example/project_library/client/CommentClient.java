@@ -16,17 +16,13 @@ import java.util.UUID;
 public interface CommentClient {
 
 
-//    @GetMapping("/{movieId}")
-//    List<CommentDto> getComments(@PathVariable("movieId") UUID movieId);
-
     @GetMapping("/{id}")
     MovieDto getMovieDetails(@PathVariable UUID id);
 
     @PostMapping("/{movieId}/comment")
     CommentDto addComment(@PathVariable("movieId") UUID movieId, @RequestBody CommentDto dto);
 
-//    @GetMapping("/{id}/poster")
-//    ResponseEntity<byte[]> getPoster(@PathVariable("id") UUID id);
+
 
 
 

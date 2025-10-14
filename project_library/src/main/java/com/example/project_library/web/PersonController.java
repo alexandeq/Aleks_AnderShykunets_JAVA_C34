@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class PersonController {
 
-    private final PersonClient client;
+    private final PersonService service;
 
     @GetMapping("/register")
     public String registerForm(Model model) {
@@ -21,7 +21,7 @@ public class PersonController {
 
     @PostMapping("/register")
     public String register(@ModelAttribute("user") PersonDto dto, Model model) {
-        client.register(dto);
+        service.register(dto);
         model.addAttribute("message", "Регистрация прошла успешно!");
         return "success";
     }

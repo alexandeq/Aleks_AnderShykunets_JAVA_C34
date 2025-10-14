@@ -13,7 +13,10 @@ public class PersonServiceImpl implements PersonService {
 
     private final PersonClient client;
 
-
+    @Override
+    public PersonDto register(PersonDto dto) {
+        return client.register(dto);
+    }
 }
 
 

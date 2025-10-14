@@ -19,7 +19,6 @@ public class PosterEntity {
     @UuidGenerator
     private UUID id;
 
-
     @Column(name = "image", nullable = false)
     private byte[] image;
 

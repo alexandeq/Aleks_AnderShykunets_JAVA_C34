@@ -46,9 +46,6 @@ public class MovieUserController {
                 .body(poster.getImage());
     }
 
-
-
-
 }
 
 

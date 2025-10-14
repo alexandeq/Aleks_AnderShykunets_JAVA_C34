@@ -18,7 +18,6 @@ public class CommentController {
 
     private final MovieService service;
 
-
     @PostMapping("/{id}/comment")
     public ResponseEntity<CommentDto> addComment(
             @PathVariable UUID id,
@@ -33,10 +32,6 @@ public class CommentController {
     public MovieDto getMovieDetails(@PathVariable UUID id) {
         return service.getMovieDetails(id);
     }
-
-
-
-
 
 
 }

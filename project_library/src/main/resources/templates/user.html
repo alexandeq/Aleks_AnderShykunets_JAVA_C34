@@ -1,7 +1,23 @@
-
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Фильмотека</title>
+  <style>
+    img {
+      width: 60px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      padding: 8px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
 <h2>Список фильмов</h2>
@@ -14,14 +30,21 @@
   <input type="submit" value="Поиск">
 </form>
 
-<table border="1">
+<table>
   <tr>
+    <th>Постер</th>
     <th>Название</th>
     <th>Год</th>
     <th>Рейтинг</th>
     <th>Детали</th>
   </tr>
   <tr th:each="movie : ${movies}">
+    <td>
+      <img th:if="${movie.posterUrl != null}"
+           th:src="@{'http://localhost:8082/movie/admin/' + ${movie.id} + '/poster'}"
+           alt="Poster"/>
+      <span th:if="${movie.posterUrl == null}">—</span>
+    </td>
     <td th:text="${movie.title}"></td>
     <td th:text="${movie.year}"></td>
     <td th:text="${movie.rating}"></td>
@@ -30,6 +53,8 @@
         <button>Выбрать</button>
       </a>
     </td>
-    </tr>
-
+  </tr>
 </table>
+
+</body>
+</html>

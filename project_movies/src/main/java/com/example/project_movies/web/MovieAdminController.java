@@ -23,6 +23,10 @@ public class MovieAdminController {
 
     private final MovieService service;
 
+    @GetMapping("/{id}")
+    public MovieDto findById(@PathVariable UUID id) {
+        return service.findById(id);
+    }
 
     @PostMapping
     public MovieDto create(@RequestBody MovieDto dto) {
@@ -40,15 +44,12 @@ public class MovieAdminController {
         service.delete(id);
     }
 
-
-    @PostMapping("/{id}/poster")
-    public ResponseEntity<PosterDto> addPoster(
-            @PathVariable UUID id,
-            @RequestParam("poster") MultipartFile poster
-    ) throws IOException {
-        PosterDto dto = service.addOrUpdatePoster(id, poster);
+    @PostMapping(value = "/{id}/poster", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<PosterDto> addPoster(@PathVariable UUID id, @RequestPart("poster") MultipartFile poster) throws IOException {
+        PosterDto dto = service.addPoster(id, poster);
         return ResponseEntity.ok(dto);
     }
+
 
     @GetMapping("/{id}/poster")
     public ResponseEntity<byte[]> getPosterByAdmin(@PathVariable UUID id) {
@@ -57,4 +58,5 @@ public class MovieAdminController {
                 .contentType(MediaType.IMAGE_JPEG)
                 .body(image);
     }
+
 }

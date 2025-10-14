@@ -32,22 +32,24 @@ public class MovieAdminServiceImpl implements MovieAdminService {
     public void delete(UUID id) {
         client.delete(id);
     }
+
     @Override
     public MovieDto findById(UUID id) {
         return client.findById(id);
     }
 
-    @Override
-    public PosterDto addPoster(UUID movieId, MultipartFile posterFile) throws IOException {
-        ResponseEntity<PosterDto> response = client.addPoster(movieId, posterFile);
-        return response.getBody();
-    }
 
-    @Override
-    public byte[] getPosterByAdmin(UUID movieId) {
-        ResponseEntity<byte[]> response = client.getPosterByAdmin(movieId);
-        return response.getBody();
-    }
+
+
+//    @Override
+//    public PosterDto addPoster(UUID movieId, MultipartFile posterFile) throws IOException {
+//        return client.addPoster(movieId, posterFile).getBody();
+//    }
+//
+//    @Override
+//    public byte[] getPosterByAdmin(UUID movieId) {
+//        return client.getPosterByAdmin(movieId).getBody();
+//    }
 
 
 }

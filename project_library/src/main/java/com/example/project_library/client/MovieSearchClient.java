@@ -12,7 +12,7 @@ import java.util.List;
 public interface MovieSearchClient {
 
 
-    @PostMapping //("/search")
+    @PostMapping
     List<MovieDto> search(@RequestBody MovieSearchDto dto);
 
 

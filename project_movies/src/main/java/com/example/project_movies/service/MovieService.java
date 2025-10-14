@@ -34,7 +34,7 @@ public interface MovieService {
 
     MovieDto getMovieDetails(UUID movieId);
 
-    PosterDto addOrUpdatePoster(UUID movieId, MultipartFile posterFile) throws IOException;
+    PosterDto addPoster(UUID movieId, MultipartFile posterFile) throws IOException;
 
 
 

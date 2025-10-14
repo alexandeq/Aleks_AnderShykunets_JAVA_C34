@@ -22,24 +22,13 @@ public interface MovieAdminClient {
     @DeleteMapping("/{id}")
     void delete(@PathVariable("id") UUID id);
 
-
     @GetMapping("/{id}")
     MovieDto findById(@PathVariable UUID id);
-
-
-//    @PostMapping(value = "/{id}/poster", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-//    ResponseEntity<PosterDto> addPoster(
-//            @PathVariable("id") UUID movieId,
-//            @RequestPart("poster") MultipartFile posterFile);
-
 
     @GetMapping("/{id}/poster")
     ResponseEntity<byte[]> getPosterByAdmin(@PathVariable UUID id);
 
+    @PostMapping(value = "/{id}/poster", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    ResponseEntity<PosterDto> addPoster(@PathVariable UUID id, @RequestPart("poster") MultipartFile poster);
 
-        @PostMapping("/{id}/poster")
-        ResponseEntity<PosterDto> addPoster (
-                @PathVariable UUID id,
-                @RequestParam("poster") MultipartFile poster);
-    }
-
+}

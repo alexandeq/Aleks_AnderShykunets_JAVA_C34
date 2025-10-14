@@ -1,31 +1,38 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
   <meta charset="UTF-8">
   <title>Загрузка постера</title>
   <style>
-    body { font-family: Arial; background: #f5f5f5; margin: 50px; }
-    form { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px #ccc; }
-    h2 { color: #333; }
-    input[type=file] { margin-top: 10px; }
-    button { margin-top: 20px; background: dodgerblue; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+    body { font-family: Arial, sans-serif; margin: 30px; }
+    h1 { margin-bottom: 20px; }
+     img {
+      display: block;
+      margin-top: 20px;
+      max-width: 500px; /* увеличиваем ширину */
+      width: 100%;      /* адаптивно */
+      height: auto;     /* сохраняем пропорции */
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .message { color: green; font-weight: bold; margin-top: 15px; }
+    input[type="file"] { margin-bottom: 10px; }
   </style>
 </head>
 <body>
-<h2>Добавить постер к фильму</h2>
 
-<form th:action="@{'/movie/admin/' + ${movieId} + '/poster'}"
-      method="post"
-      enctype="multipart/form-data">
-  <label for="poster">Выберите изображение:</label>
-  <input type="file" id="poster" name="poster" accept="image/*" required>
 
+
+<h1>Загрузка постера для фильма</h1>
+<form th:action="@{/movie/admin/{id}/poster(id=${movieId})}" method="post" enctype="multipart/form-data">
+  <input type="file" name="poster" required/>
   <button type="submit">Загрузить</button>
 </form>
 
-<br>
-<a th:href="@{/movie/admin}">⬅ Назад к списку фильмов</a>
 
-</body>
-</html>
+<p th:if="${message != null}" th:text="${message}"></p>
+<img th:if="${posterUrl != null}" th:src="@{'http://localhost:8082' + ${posterUrl}}" width="150"/>
 
+
+
+<a th:href="@{/movie/admin}">← Назад к списку фильмов</a>

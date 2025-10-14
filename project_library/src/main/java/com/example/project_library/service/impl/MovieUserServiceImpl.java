@@ -20,11 +20,6 @@ public class MovieUserServiceImpl implements MovieUserService {
     public List<MovieDto> findAll() {
       return client.getAll();
     }
-    @Override
-    public ResponseEntity<byte[]> getPoster(UUID id) {
-        return client.getPoster(id);
-    }
-
 
 
 

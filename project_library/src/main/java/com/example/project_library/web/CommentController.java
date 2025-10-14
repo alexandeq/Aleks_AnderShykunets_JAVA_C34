@@ -28,8 +28,7 @@ public class CommentController {
             model.addAttribute("movie", movie);
             model.addAttribute("comments", movie.getComments());
             model.addAttribute("newComment", new CommentDto());
-            System.out.println(movie.getPosterUrl());
-            return "comment"; // имя шаблона
+            return "comment";
         }
 
 
