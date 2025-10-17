@@ -1,25 +1,84 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>Регистрация</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #f4f4f4;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+        }
+        .register-container {
+          background: white;
+          padding: 30px 40px;
+          border-radius: 10px;
+          box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+          width: 360px;
+          text-align: center;
+        }
+        h2 {
+          margin-bottom: 20px;
+          color: #333;
+        }
+        input, select, button {
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 12px;
+          border-radius: 6px;
+          border: 1px solid #ccc;
+          font-size: 14px;
+        }
+        button {
+          background: #28a745;
+          color: white;
+          cursor: pointer;
+          font-size: 15px;
+          font-weight: bold;
+        }
+        button:hover {
+          background: #218838;
+        }
+        a {
+          text-decoration: none;
+          color: #007bff;
+          font-size: 14px;
+        }
+        a:hover {
+          text-decoration: underline;
+        }
+        .message {
+          color: green;
+          font-weight: bold;
+          margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
-<h2>Регистрация пользователя</h2>
 
-<form method="post" th:action="@{/register}" th:object="${user}">
-    Логин: <input type="text" name ="username"/><br>
-    Пароль: <input type="password" name="password"/><br>
+<div class="register-container">
+    <h2>Регистрация</h2>
 
-    Роль:
-    <select th:field="*{authority}">
-        <option value="USER" selected>USER</option>
-        <option value="ADMIN">ADMIN</option>
-    </select><br>
+    <p th:if="${message}" class="message" th:text="${message}"></p>
 
-    <button type="submit">Зарегистрироваться</button>
-</form>
+    <form th:action="@{/register}" th:object="${user}" method="post">
+        <input type="text" th:field="*{username}" placeholder="Имя пользователя" required/>
+        <input type="password" th:field="*{password}" placeholder="Пароль" required/>
 
-<p>Уже есть аккаунт? <a th:href="@{/login}">Войти</a></p>
+        <select th:field="*{authority}" required>
+            <option value="" disabled selected>Выберите роль</option>
+            <option value="USER">Пользователь</option>
+            <option value="ADMIN">Администратор</option>
+        </select>
+
+        <button type="submit">Зарегистрироваться</button>
+    </form>
+
+    <p>Уже есть аккаунт? <a th:href="@{/login}">Войти</a></p>
+</div>
 
 </body>
 </html>

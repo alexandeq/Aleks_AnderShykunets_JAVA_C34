@@ -17,4 +17,8 @@ public class PersonDto {
     private String password;
     private String authority;
 
+    public PersonDto(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 }

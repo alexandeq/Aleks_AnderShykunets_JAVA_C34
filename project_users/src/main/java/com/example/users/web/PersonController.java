@@ -1,7 +1,7 @@
 package com.example.users.web;
 
 import com.example.users.dto.PersonDto;
-import com.example.users.service.PersonService;
+import com.example.users.service.impl.PersonServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class PersonController {
 
-    private final PersonService service;
+    private final PersonServiceImpl service;
+
 
     @PostMapping("/register")
     public PersonDto register(@RequestBody PersonDto dto) {
@@ -17,7 +18,10 @@ public class PersonController {
     }
 
     @GetMapping
-    public PersonDto find(@RequestParam String username) {
+    public PersonDto find(@RequestParam("username") String username) {
         return service.find(username);
     }
+
+
 }
+

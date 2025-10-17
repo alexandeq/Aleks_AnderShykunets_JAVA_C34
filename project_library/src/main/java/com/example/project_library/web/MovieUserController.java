@@ -28,10 +28,16 @@ public class MovieUserController {
         return "user";
     }
 
-    @PostMapping
+//    @PostMapping
+//    public String role() {
+//        return "roles";
+//    }
+
+    @GetMapping
     public String role() {
         return "roles";
     }
+
 
     @GetMapping("/{id}/poster")
     public ResponseEntity<byte[]> getPoster(@PathVariable UUID id) {

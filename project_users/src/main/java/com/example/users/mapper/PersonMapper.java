@@ -3,6 +3,7 @@ package com.example.users.mapper;
 import com.example.users.domain.PersonEntity;
 import com.example.users.dto.PersonDto;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 
@@ -10,6 +11,7 @@ import java.util.List;
 public interface PersonMapper {
 
     PersonEntity toEntity(PersonDto dto);
+
 
     PersonDto toDto(PersonEntity entity);
 

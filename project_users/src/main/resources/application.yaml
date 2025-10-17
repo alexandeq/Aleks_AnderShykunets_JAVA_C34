@@ -6,3 +6,6 @@ spring:
     username: postgres
     password: postgres
 
+logging:
+  level:
+    org.springframework.security: DEBUG
