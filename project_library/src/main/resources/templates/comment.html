@@ -1,76 +1,157 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
   <meta charset="UTF-8">
   <title th:text="${movie.title}">Фильм</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      line-height: 1.5;
-      margin: 20px;
-      background-color: #fafafa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #eaf7ea;
+      margin: 0;
+      padding: 20px;
+      color: #333;
     }
-    h2 { color: #333; }
-    img { margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
-    hr { margin: 20px 0; }
-    textarea { width: 100%; height: 80px; resize: vertical; }
-    input[type="number"] { width: 60px; }
-    ul { list-style: none; padding: 0; }
-    li { border-bottom: 1px solid #ccc; padding: 10px 0; }
-    .poster { margin-bottom: 20px; }
-    button {
-      padding: 8px 16px;
-      border: none;
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .top-section {
+      display: grid;
+      grid-template-columns: 400px 1fr; /* увеличиваем постер */
+      gap: 30px;
+      align-items: start;
+      margin-bottom: 20px;
+    }
+
+    .poster img {
+      width: 100%;
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+
+    .details h2 {
+      margin: 0 0 15px 0;
+      color: #2e7d32;
+      font-size: 2.4em; /* увеличиваем заголовок */
+    }
+
+    .details p {
+      font-weight: bold;
+      margin: 8px 0;
+      color: #256628;
+      font-size: 1.1em;
+    }
+
+    .description {
+      margin-top: 20px;
+      line-height: 1.6;
+      font-size: 1.1em;
+      text-align: justify;
+    }
+
+    .comments-section {
+      margin-top: 30px;
+    }
+
+    h3 {
+      color: #2e7d32;
+      margin-bottom: 15px;
+    }
+
+    .comments-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .comment-card {
+      background-color: #f4faf4;
+      border-radius: 10px;
+      padding: 14px 18px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+    }
+
+    .comment-card p {
+      margin: 4px 0;
+    }
+
+    form.comment-form {
+      margin-top: 20px;
+      display: grid;
+      gap: 10px;
+    }
+
+    form.comment-form textarea,
+    form.comment-form input[type="number"] {
+      width: 100%;
+      padding: 10px 12px;
       border-radius: 6px;
-      background-color: #1976d2;
-      color: white;
-      cursor: pointer;
+      border: 1px solid #b5d6b3;
+      font-size: 15px;
     }
-    button:hover { background-color: #125da1; }
+
+    form.comment-form input[type="number"] {
+      width: 90px;
+    }
+
+    form.comment-form button {
+      width: fit-content;
+      padding: 14px 28px;
+      background-color: #2e7d32;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 1.1em;
+      margin-top: 10px;
+      transition: background 0.3s ease;
+    }
+
+    form.comment-form button:hover {
+      background-color: #256628;
+    }
+
   </style>
 </head>
 <body>
 
-<h2 th:text="${movie.title}">Название фильма</h2>
-<p><strong>Год:</strong> <span th:text="${movie.year}">Год</span></p>
-<p><strong>Средняя оценка:</strong> <span th:text="${movie.rating}">0</span></p>
-<p><strong>Описание:</strong> <span th:text="${movie.description}">Описание</span></p>
+<div class="container">
+  <div class="top-section">
+    <div class="poster">
+      <img th:if="${movie.posterUrl != null and movie.posterUrl != ''}" th:src="${movie.posterUrl}" alt="Poster">
+    </div>
+    <div class="details">
+      <h2 th:text="${movie.title}">Название фильма</h2>
+      <p><strong>Год:</strong> <span th:text="${movie.year}">2025</span></p>
+      <p><strong>Средняя оценка:</strong> <span th:text="${movie.rating}">0</span></p>
+    </div>
+  </div>
 
-<hr>
+  <p class="description" th:text="${movie.description}">Описание фильма...</p>
 
-<!-- 🎬 Постер -->
-<div class="poster">
-  <img th:if="${movie.posterUrl != null and movie.posterUrl != ''}"
-       th:src="${movie.posterUrl}"
-       alt="Poster" width="200"/>
+  <div class="comments-section">
+    <h3>Комментарии</h3>
+    <div class="comments-list" th:if="${comments != null and #lists.size(comments) > 0}">
+      <div class="comment-card" th:each="comment : ${comments}">
+        <p th:text="${comment.comment}">Текст комментария</p>
+        <p><strong>Оценка:</strong> <span th:text="${comment.rating}">0</span></p>
+      </div>
+    </div>
 
+    <h3>Оставить комментарий</h3>
+    <form class="comment-form" th:action="@{'/movie/user/' + ${movie.id} + '/comment'}" method="post" th:object="${newComment}">
+      <label>Комментарий:</label>
+      <textarea th:field="*{comment}" placeholder="Напишите ваш отзыв..." required></textarea>
+
+      <label>Оценка (1-10):</label>
+      <input type="number" min="1" max="10" th:field="*{rating}" required>
+
+      <button type="submit">Отправить</button>
+    </form>
+  </div>
 </div>
-
-<hr>
-
-<h3>Комментарии:</h3>
-<ul th:if="${comments != null and #lists.size(comments) > 0}">
-  <li th:each="comment : ${comments}">
-    <p th:text="${comment.comment}">Текст комментария</p>
-    <p><strong>Оценка:</strong> <span th:text="${comment.rating}">0</span></p>
-  </li>
-</ul>
-
-<hr>
-
-<h3>Оставить комментарий:</h3>
-<form th:action="@{'/movie/user/' + ${movie.id} + '/comment'}"
-      method="post"
-      th:object="${newComment}">
-  <label>Комментарий:</label><br>
-  <textarea th:field="*{comment}" required></textarea><br>
-
-  <label>Оценка (1-10):</label>
-  <input type="number" min="1" max="10" th:field="*{rating}" required/><br><br>
-
-  <button type="submit">Отправить</button>
-</form>
 
 </body>
 </html>
-

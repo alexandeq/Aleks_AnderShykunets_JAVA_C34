@@ -12,6 +12,6 @@ public interface PersonClient {
     @PostMapping("/register")
     PersonDto register(@RequestBody PersonDto dto);
 
-    @GetMapping//("/users/{username}")
+    @GetMapping("/user")
     PersonDto find(@RequestParam("username") String username);
 }

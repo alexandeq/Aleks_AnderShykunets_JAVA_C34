@@ -1,18 +1,18 @@
 package com.example.project_library.web;
 
-import com.example.project_library.dto.ErrorDto;
 import com.example.project_library.exc.CommonException;
-import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@RestControllerAdvice
+@ControllerAdvice
 public class LibraryExceptionController {
 
-    @ExceptionHandler(CommonException.class)
-    public ResponseEntity<ErrorDto> handlerCommonException (CommonException exc){
-            return ResponseEntity.status(400).body(exc.getErrorDto());
-
+        @ExceptionHandler(CommonException.class)
+        public String handleUserException(CommonException ex, Model model) {
+            model.addAttribute("error", ex.getMessage());
+            return "error";
         }
-    }
 
+    }

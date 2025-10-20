@@ -4,11 +4,14 @@ import com.example.project_library.dto.ErrorDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@AllArgsConstructor
+
 @Getter
 public class CommonException extends RuntimeException {
 
-    private ErrorDto errorDto;
+    private final Integer errorCode;
 
+    public CommonException(Integer errorCode, String message) {
+        super(message);
+        this.errorCode = errorCode;
     }
-
+}

@@ -6,15 +6,43 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <style>
-        body { font-family: Arial; margin: 40px; background: #f5f5f5; }
-        table { border-collapse: collapse; width: 100%; background: white; }
-        th, td { padding: 10px; border: 1px solid #ccc; text-align: center; vertical-align: middle; }
-        th { background: #222; color: white; }
-        .btn { padding: 5px 10px; border: none; color: white; border-radius: 4px; cursor: pointer; }
-        .btn-create { background: green; margin-bottom: 15px; }
-        .btn-edit { background: dodgerblue; }
-        .btn-delete { background: crimson; }
-        .btn-poster { background: orange; }
+        body {
+            font-family: Arial;
+            margin: 40px;
+            background: #d4f5d0; /* зелёный фон */
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background: white;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        th {
+            background: #2e7d32; /* тёмно-зелёная шапка */
+            color: white;
+        }
+
+        .btn {
+            padding: 5px 10px;
+            border: none;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-create { background: #2e7d32; margin-bottom: 15px; }
+        .btn-edit { background: #2e7d32; }
+        .btn-delete { background: #c62828; }
+        .btn-poster { background: #f57c00; }
+
         img { width: 60px; height: 90px; border-radius: 4px; }
         tr:hover { background-color: #f1f1f1; }
     </style>
@@ -50,18 +78,12 @@
         <td th:text="${movie.rating}"></td>
         <td>
             <a th:href="@{/movie/admin/edit/{id}(id=${movie.id})}" class="btn btn-edit">Редактировать</a>
-
-            <!-- Кнопка открытия модалки -->
             <button type="button" class="btn btn-delete" data-bs-toggle="modal"
-                    th:data-bs-target="'#deleteModal_' + ${movie.id}">
-                Удалить
-            </button>
-
+                    th:data-bs-target="'#deleteModal_' + ${movie.id}">Удалить</button>
             <a th:href="@{/movie/admin/{id}/poster(id=${movie.id})}" class="btn btn-poster"
                th:text="${movie.posterUrl != null ? 'Изменить постер' : 'Добавить постер'}"></a>
         </td>
 
-        <!-- Модальное окно удаления -->
         <div th:each="movie : ${movies}" class="modal fade" th:id="'deleteModal_' + ${movie.id}" tabindex="-1"
              th:attr="aria-labelledby='deleteModalLabel_' + ${movie.id}" aria-hidden="true">
             <div class="modal-dialog">
@@ -76,7 +98,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
                         <form th:action="@{/movie/admin/delete/{id}(id=${movie.id})}" method="post" style="display:inline;">
-                            <button type="submit" class="btn btn-danger">Удалить</button>
+                            <button type="submit" class="btn btn-delete">Удалить</button>
                         </form>
                     </div>
                 </div>
@@ -88,3 +110,4 @@
 
 </body>
 </html>
+

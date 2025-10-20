@@ -9,7 +9,6 @@ public interface PersonService  {
 
     PersonDto register(PersonDto dto);
 
-    //PersonDto create(PersonDto dto);
 
-    //PersonDto find(String username);
+    PersonDto find(String username);
 }

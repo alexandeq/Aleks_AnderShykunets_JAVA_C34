@@ -3,33 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <title>Добавить фильм</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #d4f5d0; /* пастельно-зеленый фон */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .form-container {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            width: 400px;
+        }
+
+        h2 {
+            color: #2e7d32; /* насыщенный зеленый заголовок */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border: 1px solid #b5d6b3;
+            font-size: 14px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            background-color: #2e7d32;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background-color: #256628;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
 
-<h2>Добавить новый фильм</h2>
+<div class="form-container">
+    <h2>Добавить новый фильм</h2>
 
-<form th:action="@{/movie/admin/create}" th:object="${movie}" method="post">
+    <form th:action="@{/movie/admin/create}" th:object="${movie}" method="post">
+        <label for="title">Название:</label>
+        <input type="text" id="title" th:field="*{title}" required/>
 
-    <label for="title">Название:</label><br>
-    <input type="text" id="title" th:field="*{title}" required/><br><br>
+        <label for="year">Год выпуска:</label>
+        <input type="number" id="year" th:field="*{year}" required/>
 
-    <label for="year">Год выпуска:</label><br>
-    <input type="number" id="year" th:field="*{year}" required/><br><br>
+        <label for="rating">Рейтинг:</label>
+        <input type="number" id="rating" th:field="*{rating}" step="0.1" min="0" max="10"/>
 
-    <label for="rating">Рейтинг:</label><br>
-    <input type="number" id="rating" th:field="*{rating}" step="0.1" min="0" max="10"/><br><br>
+        <label for="description">Описание фильма:</label>
+        <textarea id="description" th:field="*{description}" rows="5"
+                  placeholder="Введите описание фильма..."></textarea>
 
-    <label for="description">Описание фильма:</label><br>
-    <textarea id="description" th:field="*{description}" rows="5" cols="40"
-              placeholder="Введите описание фильма..."></textarea><br><br>
+        <button type="submit">Добавить фильм</button>
+    </form>
 
-
-    <button type="submit">Добавить фильм</button>
-</form>
-
-<br>
-<a th:href="@{/movie/admin}">Назад к списку фильмов</a>
+    <a th:href="@{/movie/admin}">Назад к списку фильмов</a>
+</div>
 
 </body>
 </html>
-

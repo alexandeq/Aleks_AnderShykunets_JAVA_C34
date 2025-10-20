@@ -14,20 +14,13 @@ public class FeignConfiguration {
     public ErrorDecoder errorDecoder() {
         return (method, response) -> {
             try (var is = response.body().asInputStream()) {
-
-                var errorAsBytes = is.readAllBytes();
-
                 ObjectMapper mapper = new ObjectMapper();
-                var errorDetails = mapper.readValue(errorAsBytes, ErrorDto.class);
-
-                return new CommonException(errorDetails);
-
-            } catch (Exception exc) {
-
+                ErrorDto errorDto = mapper.readValue(is, ErrorDto.class);
+                return new CommonException(errorDto.getErrorCode(), errorDto.getDetails());
+            } catch (Exception e) {
+                return new CommonException(808000, "Unknown error");
             }
-            return new CommonException(new ErrorDto(808000, "Unknown error"));
-
-
         };
     }
 }
+

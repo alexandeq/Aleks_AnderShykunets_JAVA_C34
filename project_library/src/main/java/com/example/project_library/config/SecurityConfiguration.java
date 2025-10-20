@@ -4,6 +4,7 @@ import com.example.project_library.service.impl.DetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.*;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -22,8 +23,9 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
+                .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/register", "/login").permitAll()
+                        .requestMatchers("/register", "/login", "/error").permitAll() // разрешаем анонимным
                         .requestMatchers("/movie/admin/**").hasAuthority("ROLE_ADMIN")
                         .requestMatchers("/movie/user/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                         .anyRequest().authenticated()
@@ -31,8 +33,12 @@ public class SecurityConfiguration {
                 .formLogin(form -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/movie", true)  // ✅ переход на movie
-                        .failureUrl("/login?error=true")
+                        .defaultSuccessUrl("/movie", true)
+                        .failureHandler((request, response, exception) -> {
+                            // сохраняем ошибку в сессии и редиректим на /login
+                            request.getSession().setAttribute("LOGIN_ERROR", "❌ Неверный логин или пароль");
+                            response.sendRedirect("/login");
+                        })
                         .permitAll()
                 )
                 .logout(logout -> logout

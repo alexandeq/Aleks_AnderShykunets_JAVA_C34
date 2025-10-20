@@ -1,14 +1,60 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
   <meta charset="UTF-8">
   <title>Постер загружен</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: #d4f5d0;
+        margin: 0;
+    }
+
+    .container {
+        background: #ffffff;
+        padding: 30px 35px;
+        border-radius: 12px;
+        width: 400px;
+        text-align: center;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+    }
+
+    h2 {
+        color: #2e7d32;
+        margin-bottom: 20px;
+    }
+
+    img {
+        max-width: 300px;
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        margin-bottom: 20px;
+    }
+
+    a {
+        display: inline-block;
+        margin-top: 15px;
+        color: #2e7d32;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    a:hover { text-decoration: underline; }
+
+  </style>
 </head>
 <body>
-<h2 th:text="${message}"></h2>
-<img th:src="${posterUrl}" alt="Постер фильма" style="max-width:300px; border-radius:10px;">
-<br><br>
-<a th:href="@{/movie/admin}">⬅ Назад к списку фильмов</a>
+
+<div class="container">
+  <h2 th:text="${message}">Постер загружен</h2>
+  <img th:src="${posterUrl}" alt="Постер фильма"/>
+  <a th:href="@{/movie/admin}">⬅ Назад к списку фильмов</a>
+</div>
+
 </body>
 </html>
-

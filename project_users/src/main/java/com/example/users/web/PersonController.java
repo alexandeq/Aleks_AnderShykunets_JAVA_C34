@@ -17,7 +17,7 @@ public class PersonController {
         return service.create(dto);
     }
 
-    @GetMapping
+    @GetMapping("/user")
     public PersonDto find(@RequestParam("username") String username) {
         return service.find(username);
     }

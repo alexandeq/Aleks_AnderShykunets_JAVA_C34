@@ -3,6 +3,7 @@ package com.example.project_library.service.impl;
 import com.example.project_library.client.PersonClient;
 import com.example.project_library.dto.PersonDto;
 import com.example.project_library.service.PersonService;
+import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +18,31 @@ public class PersonServiceImpl implements PersonService {
         return client.register(dto);
     }
 
-//    public PersonDto findByUsername(String username) {
+//    public PersonDto register(PersonDto dto) {
+//        try {
+//            return client.register(dto);
+//        } catch (FeignException.BadRequest e) {
+//            // Вытаскиваем сообщение ошибки из BL
+//            throw new RuntimeException("Ошибка регистрации: " + e.contentUTF8());
+//        }
+//    }
+
+    public PersonDto find(String username) {
+        try {
+            return client.find(username);
+        } catch (FeignException.NotFound e) {
+            throw new RuntimeException("Пользователь не найден: " + username);
+        }
+    }
+}
+
+
+//
+//    public PersonDto find(String username) {
 //        return client.find(username);
 //    }
 
 
-}
+
 
 

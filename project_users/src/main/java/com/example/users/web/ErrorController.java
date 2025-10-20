@@ -1,7 +1,7 @@
 package com.example.users.web;
 
 import com.example.users.dto.ErrorDto;
-import com.example.users.exc.UserCommonException;
+import com.example.users.exc.CommonException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class ErrorController {
 
-    @ExceptionHandler(UserCommonException.class)
-    public ResponseEntity<ErrorDto> handleException(UserCommonException exc){
+    @ExceptionHandler(CommonException.class)
+    public ResponseEntity<ErrorDto> handleException(CommonException exc){
 
         var errorDto =  new ErrorDto(exc.getCode(), exc.getMessage());
 

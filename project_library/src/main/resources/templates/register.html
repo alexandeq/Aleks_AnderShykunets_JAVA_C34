@@ -5,56 +5,68 @@
     <title>Регистрация</title>
     <style>
         body {
-          font-family: Arial, sans-serif;
-          background-color: #f4f4f4;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 100vh;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #d4f5d0; /* пастельный зеленый фон */
         }
+
         .register-container {
-          background: white;
-          padding: 30px 40px;
-          border-radius: 10px;
-          box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-          width: 360px;
-          text-align: center;
+            background: #ffffff;
+            padding: 30px 35px;
+            border-radius: 12px;
+            width: 360px;
+            text-align: center;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.15);
         }
+
         h2 {
-          margin-bottom: 20px;
-          color: #333;
+            margin-bottom: 20px;
+            color: #2e7d32;
         }
+
         input, select, button {
-          width: 100%;
-          padding: 10px;
-          margin-bottom: 12px;
-          border-radius: 6px;
-          border: 1px solid #ccc;
-          font-size: 14px;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 12px;
+            border-radius: 6px;
+            border: 1px solid #b5d6b3;
+            font-size: 14px;
         }
+
         button {
-          background: #28a745;
-          color: white;
-          cursor: pointer;
-          font-size: 15px;
-          font-weight: bold;
+            background: #2e7d32;
+            color: white;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
         }
+
         button:hover {
-          background: #218838;
+            background: #256628;
         }
+
         a {
-          text-decoration: none;
-          color: #007bff;
-          font-size: 14px;
+            text-decoration: none;
+            color: #2e7d32;
+            font-size: 14px;
         }
+
         a:hover {
-          text-decoration: underline;
+            text-decoration: underline;
         }
+
         .message {
-          color: green;
-          font-weight: bold;
-          margin-bottom: 10px;
+            font-weight: bold;
+            margin-bottom: 10px;
         }
+
+        .error { color: #c62828; }
+        .success { color: #2e7d32; }
+
     </style>
 </head>
 <body>
@@ -62,18 +74,17 @@
 <div class="register-container">
     <h2>Регистрация</h2>
 
-    <p th:if="${message}" class="message" th:text="${message}"></p>
+    <p th:if="${error}" th:text="${error}" class="error"></p>
+    <p th:if="${message}" th:text="${message}" class="success"></p>
 
     <form th:action="@{/register}" th:object="${user}" method="post">
         <input type="text" th:field="*{username}" placeholder="Имя пользователя" required/>
         <input type="password" th:field="*{password}" placeholder="Пароль" required/>
-
         <select th:field="*{authority}" required>
             <option value="" disabled selected>Выберите роль</option>
             <option value="USER">Пользователь</option>
             <option value="ADMIN">Администратор</option>
         </select>
-
         <button type="submit">Зарегистрироваться</button>
     </form>
 
