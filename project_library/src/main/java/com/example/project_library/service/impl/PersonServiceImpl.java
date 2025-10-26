@@ -18,15 +18,6 @@ public class PersonServiceImpl implements PersonService {
         return client.register(dto);
     }
 
-//    public PersonDto register(PersonDto dto) {
-//        try {
-//            return client.register(dto);
-//        } catch (FeignException.BadRequest e) {
-//            // Вытаскиваем сообщение ошибки из BL
-//            throw new RuntimeException("Ошибка регистрации: " + e.contentUTF8());
-//        }
-//    }
-
     public PersonDto find(String username) {
         try {
             return client.find(username);
@@ -34,13 +25,10 @@ public class PersonServiceImpl implements PersonService {
             throw new RuntimeException("Пользователь не найден: " + username);
         }
     }
+
+
 }
 
-
-//
-//    public PersonDto find(String username) {
-//        return client.find(username);
-//    }
 
 
 

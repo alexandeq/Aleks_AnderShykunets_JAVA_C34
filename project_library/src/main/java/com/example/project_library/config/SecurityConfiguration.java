@@ -25,7 +25,7 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/register", "/login", "/error").permitAll() // разрешаем анонимным
+                        .requestMatchers("/register", "/login", "/error").permitAll()
                         .requestMatchers("/movie/admin/**").hasAuthority("ROLE_ADMIN")
                         .requestMatchers("/movie/user/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                         .anyRequest().authenticated()
@@ -35,12 +35,18 @@ public class SecurityConfiguration {
                         .loginProcessingUrl("/login")
                         .defaultSuccessUrl("/movie", true)
                         .failureHandler((request, response, exception) -> {
-                            // сохраняем ошибку в сессии и редиректим на /login
-                            request.getSession().setAttribute("LOGIN_ERROR", "❌ Неверный логин или пароль");
+                            request.getSession().setAttribute("LOGIN_ERROR", " Неверный логин или пароль");
                             response.sendRedirect("/login");
                         })
                         .permitAll()
                 )
+                .exceptionHandling(ex -> ex
+                        .accessDeniedHandler((request, response, accessDeniedException) -> {
+                            request.getSession().setAttribute("LOGIN_ERROR",
+                                    "У вас должны быть права администратора");
+                            response.sendRedirect("/login");
+                        }))
+
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login?logout=true")

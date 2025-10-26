@@ -75,8 +75,6 @@ public class MovieAdminController {
     }
 
 
-
-
     @GetMapping("/{id}/poster")
     public String poster(@PathVariable UUID id, Model model) {
         model.addAttribute("movieId", id);

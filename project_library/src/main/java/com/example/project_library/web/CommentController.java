@@ -24,7 +24,7 @@ public class CommentController {
 
         @GetMapping("/{id}")
         public String getMovieDetails(@PathVariable UUID id, Model model) {
-            MovieDto movie = service.getMovieDetails(id); // 🟢 получаем фильм + постер + комментарии
+            MovieDto movie = service.getMovieDetails(id);
             model.addAttribute("movie", movie);
             model.addAttribute("comments", movie.getComments());
             model.addAttribute("newComment", new CommentDto());
@@ -37,7 +37,7 @@ public class CommentController {
                              @ModelAttribute CommentDto commentDto) {
 
         service.addComment(movieId, commentDto);
-        return "redirect:/movie/user/" + movieId; // обновляем страницу
+        return "redirect:/movie/user/" + movieId;
     }
 
 

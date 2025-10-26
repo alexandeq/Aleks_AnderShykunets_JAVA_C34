@@ -44,10 +44,3 @@ public class PersonServiceImpl implements PersonService {
     }
 }
 
-
-//
-//    public PersonDto find(String username) {
-//        var entity = repo.findByUsername(username)
-//                .orElseThrow(() -> new RuntimeException("User not found"));
-//        return toDto(entity);
-//    }

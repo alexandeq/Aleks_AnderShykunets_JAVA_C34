@@ -12,9 +12,7 @@ import lombok.Setter;
 public class MovieSearchDto {
 
     private String title;
-
     private Integer from;
     private Integer to;
-
     private Integer rating;
 }

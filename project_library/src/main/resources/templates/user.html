@@ -53,22 +53,25 @@
 
     table {
       width: 100%;
-      border-collapse: collapse;
-      background: #ffffff;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      border-collapse: separate;
+      border-spacing: 0 15px;
     }
 
     th, td {
       padding: 12px;
       text-align: center;
-      border-bottom: 1px solid #b5d6b3;
     }
 
     th {
       background-color: #c8e6c9;
       color: #2e7d32;
+      border-radius: 6px;
+    }
+
+    tbody tr {
+      background: #ffffff;
+      border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
     img {
@@ -102,6 +105,9 @@
 <body>
 
 <h2>Список фильмов</h2>
+
+<a th:href="@{/movie}">← Назад к выбору роли</a>
+
 
 <form action="/movie/user/search" method="post">
   <input type="text" name="title" placeholder="Название фильма">

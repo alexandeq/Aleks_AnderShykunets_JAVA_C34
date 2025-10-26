@@ -14,6 +14,5 @@ import java.util.UUID;
 public class PosterDto {
 
     private UUID id;
-
     private String posterUrl;
 }

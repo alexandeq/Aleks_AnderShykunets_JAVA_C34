@@ -12,8 +12,7 @@ public interface PersonMapper {
 
     PersonEntity toEntity(PersonDto dto);
 
-
     PersonDto toDto(PersonEntity entity);
 
-   // List<PersonDto> toDtos(List<PersonEntity> entities);
+
 }

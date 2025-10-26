@@ -10,5 +10,4 @@ public interface MovieUserService {
 
     List<MovieDto> findAll();
 
-   // ResponseEntity<byte[]> getPoster(UUID id);
 }

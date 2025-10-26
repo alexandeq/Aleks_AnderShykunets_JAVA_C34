@@ -9,6 +9,5 @@ public interface PersonService  {
 
     PersonDto register(PersonDto dto);
 
-
     PersonDto find(String username);
 }

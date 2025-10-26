@@ -16,7 +16,6 @@ public class CommentDto {
     private double rating;
     private UUID movieId;
 
-
 }
 
 

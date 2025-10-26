@@ -11,7 +11,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #d4f5d0; /* пастельный зеленый фон */
+            background-color: #d4f5d0;
         }
 
         .register-container {
@@ -82,8 +82,8 @@
         <input type="password" th:field="*{password}" placeholder="Пароль" required/>
         <select th:field="*{authority}" required>
             <option value="" disabled selected>Выберите роль</option>
-            <option value="USER">Пользователь</option>
-            <option value="ADMIN">Администратор</option>
+            <option value="USER">USER</option>
+            <option value="ADMIN">ADMIN</option>
         </select>
         <button type="submit">Зарегистрироваться</button>
     </form>

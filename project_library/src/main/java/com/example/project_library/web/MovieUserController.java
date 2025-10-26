@@ -28,10 +28,6 @@ public class MovieUserController {
         return "user";
     }
 
-//    @PostMapping
-//    public String role() {
-//        return "roles";
-//    }
 
     @GetMapping
     public String role() {

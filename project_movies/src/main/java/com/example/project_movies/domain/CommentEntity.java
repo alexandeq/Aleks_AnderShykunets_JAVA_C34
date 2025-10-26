@@ -22,9 +22,7 @@ public class CommentEntity {
     private UUID id;
 
     private String comment;
-
     private double rating;
-
 
     @ManyToOne
     @JoinColumn(name = "movie_id", nullable = false)

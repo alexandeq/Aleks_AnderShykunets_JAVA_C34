@@ -11,7 +11,6 @@ import java.util.List;
 @FeignClient(name = "movieSearch-client", url = "http://localhost:8082", path = "/movie/search")
 public interface MovieSearchClient {
 
-
     @PostMapping
     List<MovieDto> search(@RequestBody MovieSearchDto dto);
 

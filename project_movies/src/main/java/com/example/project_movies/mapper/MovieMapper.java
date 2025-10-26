@@ -11,7 +11,7 @@ import java.util.List;
 public interface MovieMapper {
 
 
-    @Mapping(target = "poster", ignore = true) // ✅ игнорируем
+    @Mapping(target = "poster", ignore = true)
     MovieEntity toEntity(MovieDto dto);
 
     @Mapping(target = "posterUrl",

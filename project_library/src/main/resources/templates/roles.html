@@ -11,7 +11,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #d4f5d0; /* пастельный зеленый фон */
+            background-color: #d4f5d0;
         }
 
         .role-container {
@@ -33,20 +33,38 @@
             padding: 12px;
             margin-bottom: 15px;
             border-radius: 6px;
-            border: 1px solid #b5d6b3;
-            background-color: #2e7d32;
+            border: none;
             color: white;
             font-size: 15px;
             font-weight: bold;
             cursor: pointer;
-        }
-
-        button:hover, input[type="submit"]:hover {
-            background-color: #256628;
+            transition: background 0.3s;
         }
 
         form {
             margin-bottom: 15px;
+        }
+
+        /* Цвета для каждой кнопки */
+        .btn-user {
+            background-color: #81c784; /* светло-зелёный */
+        }
+        .btn-user:hover {
+            background-color: #66bb6a;
+        }
+
+        .btn-admin {
+            background-color: #2e7d32; /* насыщенный зелёный */
+        }
+        .btn-admin:hover {
+            background-color: #256628;
+        }
+
+        .btn-logout {
+            background-color: #ff9800; /* оранжевый */
+        }
+        .btn-logout:hover {
+            background-color: #fb8c00;
         }
 
     </style>
@@ -57,18 +75,17 @@
     <h2>Выберите роль</h2>
 
     <form th:action="@{/movie/user}" method="get">
-        <button type="submit">Перейти как USER</button>
+        <button type="submit" class="btn-user">Перейти как USER</button>
     </form>
 
     <form th:action="@{/movie/admin}" method="get">
-        <button type="submit">Перейти как ADMIN</button>
+        <button type="submit" class="btn-admin">Перейти как ADMIN</button>
     </form>
 
     <form th:action="@{/logout}" method="get">
-        <input type="submit" value="Logout">
+        <input type="submit" value="Logout" class="btn-logout">
     </form>
 </div>
 
 </body>
 </html>
-

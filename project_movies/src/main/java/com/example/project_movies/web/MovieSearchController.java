@@ -19,7 +19,6 @@ public class MovieSearchController {
 
     private final MovieService service;
 
-
     @PostMapping
     public List<MovieDto> searchMovies(@RequestBody MovieSearchDto dto) {
         return service.search(dto);

@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -49,7 +50,7 @@ public class MovieServiceImpl implements MovieService {
         });
 
         try {
-            poster.setImage(posterFile.getBytes()); // ✅ byte[]
+            poster.setImage(posterFile.getBytes());
         } catch (IOException e) {
             throw new MovieCommonException(808208, "Failed to read poster file");
         }
@@ -90,9 +91,12 @@ public class MovieServiceImpl implements MovieService {
         return movieMapper.toDto(result);
     }
 
+
     @Override
     public List<MovieDto> findAll() {
-        return movieMapper.toDtos(movieRepo.findAll());
+        List<MovieDto> movies = movieMapper.toDtos(movieRepo.findAll());
+        Collections.reverse(movies);
+        return movies;
     }
 
 
@@ -121,16 +125,6 @@ public class MovieServiceImpl implements MovieService {
     }
 
 
-
-//    @Override
-//    public MovieDto findById(UUID id) {
-//        var entity = movieRepo.findById(id)
-//                .orElseThrow(() -> new MovieCommonException(808202, "Movie with this ID not found"));
-//
-//        return movieMapper.toDto(entity);
-//    }
-
-
     @Override
     public MovieDto editByIdByAdmin(UUID id, MovieDto dto) {
         var existingEntity = movieRepo.findById(id).get();
@@ -150,12 +144,11 @@ public class MovieServiceImpl implements MovieService {
                 .orElseThrow(() -> new MovieCommonException(808201, "Movie not found"));
 
         var entity = commentMapper.toEntity(dto);
-        entity.setId(null); // ✅ новая сущность
+        entity.setId(null);
         entity.setMovie(movie);
 
-        var saved = commentRepo.saveAndFlush(entity); // ✅ сразу записываем в БД
+        var saved = commentRepo.saveAndFlush(entity);
 
-        // 🔹 обновляем рейтинг фильма
         Double avg = commentRepo.getAverageRatingByMovieId(movieId);
         if (avg != null) {
             BigDecimal bd = new BigDecimal(avg).setScale(1, RoundingMode.HALF_UP);
@@ -164,16 +157,11 @@ public class MovieServiceImpl implements MovieService {
             movie.setRating(0.0);
         }
 
-        movieRepo.save(movie); // ✅ теперь Hibernate не трогает комментарии
+        movieRepo.save(movie);
 
         return commentMapper.toDto(saved);
     }
 
-
-//    @Override
-//    public List<CommentDto> findByMovieId(UUID movieId) {
-//        return commentMapper.toDtos(commentRepo.findByMovieId(movieId));
-//    }
 
     @Override
     public List<CommentDto> getComments(UUID movieId) {
@@ -208,7 +196,7 @@ public class MovieServiceImpl implements MovieService {
 
 
             if (StringUtils.isNotBlank(dto.getTitle())) {
-                predicates.add(builder.like(root.get("title"), "%" + dto.getTitle().toLowerCase() + "%"));
+                predicates.add(builder.like(builder.lower(root.get("title")),"%" + dto.getTitle().toLowerCase() + "%"));
             }
 
 

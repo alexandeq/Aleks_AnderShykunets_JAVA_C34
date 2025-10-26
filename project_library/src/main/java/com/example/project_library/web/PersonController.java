@@ -17,20 +17,6 @@ public class PersonController {
 
     private final PersonService service;
 
-//    @GetMapping("/login")
-//    public String loginPage(HttpServletRequest request, Model model) {
-//        Object error = request.getAttribute("error");
-//        if (error != null) {
-//            model.addAttribute("error", error.toString());
-//        }
-//        return "login"; // login.html
-//    }
-
-
-
-    //
-
-
 
     @GetMapping("/login")
     public String loginPage(HttpServletRequest request, Model model) {
