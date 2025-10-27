@@ -1,15 +1,11 @@
 package com.example.project_library.service;
 
 import com.example.project_library.dto.MovieDto;
-import com.example.project_library.dto.PosterDto;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+import com.example.project_library.dto.PageDto;
+
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 public interface MovieAdminService {
@@ -21,6 +17,8 @@ public interface MovieAdminService {
     void delete(UUID id) ;
 
     MovieDto findById(UUID id);
+
+    List<MovieDto> findPageable(PageDto dto);
 
 
 }

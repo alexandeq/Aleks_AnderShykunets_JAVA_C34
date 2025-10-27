@@ -21,7 +21,7 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public PersonDto create(PersonDto dto) {
         if (repo.existsByUsername(dto.getUsername())) {
-            throw new CommonException(808101, "User already exists");
+            throw new CommonException(808101, "Пользователь: " + dto.getUsername() + " - уже существует");
         }
 
         var entity = mapper.toEntity(dto);
@@ -39,7 +39,7 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public PersonDto find(String username) {
         var entity = repo.findByUsername(username)
-                .orElseThrow(() -> new CommonException(808102, "User not found"));
+                .orElseThrow(() -> new CommonException(808102, "Пользователь не найден"));
         return mapper.toDto(entity);
     }
 }

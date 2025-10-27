@@ -1,6 +1,7 @@
 package com.example.project_library.client;
 
 import com.example.project_library.dto.MovieDto;
+import com.example.project_library.dto.PageDto;
 import com.example.project_library.dto.PosterDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 @FeignClient(name = "movie-admin-client", url = "http://localhost:8082", path = "/movie/admin")
 public interface MovieAdminClient {
@@ -30,5 +32,8 @@ public interface MovieAdminClient {
 
     @PostMapping(value = "/{id}/poster", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     ResponseEntity<PosterDto> addPoster(@PathVariable UUID id, @RequestPart("poster") MultipartFile poster);
+
+    @PostMapping("/page")
+    List<MovieDto> findPage(@RequestBody PageDto dto);
 
 }

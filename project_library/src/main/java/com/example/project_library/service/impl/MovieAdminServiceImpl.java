@@ -1,16 +1,12 @@
 package com.example.project_library.service.impl;
 
 import com.example.project_library.client.MovieAdminClient;
-import com.example.project_library.client.MovieUserClient;
 import com.example.project_library.dto.MovieDto;
-import com.example.project_library.dto.PosterDto;
+import com.example.project_library.dto.PageDto;
 import com.example.project_library.service.MovieAdminService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 @Service
 @RequiredArgsConstructor
@@ -38,6 +34,9 @@ public class MovieAdminServiceImpl implements MovieAdminService {
         return client.findById(id);
     }
 
+    @Override
+    public List<MovieDto> findPageable(PageDto dto) {
+        return client.findPage(dto);
 
-
+    }
 }

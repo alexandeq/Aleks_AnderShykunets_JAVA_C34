@@ -71,6 +71,13 @@
     </form>
 </div>
 
+<form th:action="@{/movie/admin/page}" method="post">
+    Страница: <input type="number" name="page"> <br>
+    Размер:<input type="number" name= "size"> <br>
+    <input type="submit" value="Поиск">
+
+</form>
+
 <table>
     <thead>
     <tr>

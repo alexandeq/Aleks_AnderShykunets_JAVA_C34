@@ -1,13 +1,8 @@
 package com.example.project_library.web;
-import com.example.project_library.client.PersonClient;
 import com.example.project_library.dto.PersonDto;
-import com.example.project_library.exc.CommonException;
 import com.example.project_library.service.PersonService;
-import feign.FeignException;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 public class PersonController {
 
     private final PersonService service;
-
 
     @GetMapping("/login")
     public String loginPage(HttpServletRequest request, Model model) {
@@ -28,13 +22,11 @@ public class PersonController {
         return "login";
     }
 
-
         @GetMapping("/register")
         public String registerPage(Model model) {
             model.addAttribute("user", new PersonDto());
             return "register";
         }
-
 
         @PostMapping("/register")
         public String register(@ModelAttribute PersonDto dto, Model model) {
@@ -49,14 +41,12 @@ public class PersonController {
             }
         }
 
-
          @GetMapping("/error")
         public String errorPage(HttpServletRequest request, Model model) {
             Object error = request.getAttribute("error");
             if (error != null) model.addAttribute("error", error.toString());
             return "error";
         }
-
 
 
 }

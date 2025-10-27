@@ -1,11 +1,13 @@
 package com.example.project_movies.web;
 
 import com.example.project_movies.dto.MovieDto;
+import com.example.project_movies.dto.PageDto;
 import com.example.project_movies.dto.PosterDto;
 import com.example.project_movies.service.MovieService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -57,6 +60,11 @@ public class MovieAdminController {
         return ResponseEntity.ok()
                 .contentType(MediaType.IMAGE_JPEG)
                 .body(image);
+    }
+
+    @PostMapping("/page")
+    public List<MovieDto> findPage(@RequestBody PageDto dto) {
+       return service.findPageable(dto);
     }
 
 }

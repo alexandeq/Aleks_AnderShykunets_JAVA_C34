@@ -2,10 +2,8 @@ package com.example.project_movies.service;
 
 import com.example.project_movies.domain.CommentEntity;
 import com.example.project_movies.domain.MovieEntity;
-import com.example.project_movies.dto.CommentDto;
-import com.example.project_movies.dto.MovieDto;
-import com.example.project_movies.dto.MovieSearchDto;
-import com.example.project_movies.dto.PosterDto;
+import com.example.project_movies.dto.*;
+import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -35,6 +33,8 @@ public interface MovieService {
     MovieDto getMovieDetails(UUID movieId);
 
     PosterDto addPoster(UUID movieId, MultipartFile posterFile) throws IOException;
+
+    List<MovieDto> findPageable(PageDto dto);
 
 
 

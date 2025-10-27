@@ -1,10 +1,7 @@
 package com.example.project_movies.service.impl;
 import com.example.project_movies.domain.MovieEntity;
 import com.example.project_movies.domain.PosterEntity;
-import com.example.project_movies.dto.CommentDto;
-import com.example.project_movies.dto.MovieDto;
-import com.example.project_movies.dto.MovieSearchDto;
-import com.example.project_movies.dto.PosterDto;
+import com.example.project_movies.dto.*;
 import com.example.project_movies.exc.MovieCommonException;
 import com.example.project_movies.mapper.CommentMapper;
 import com.example.project_movies.mapper.MovieMapper;
@@ -16,6 +13,7 @@ import com.example.project_movies.service.MovieService;
 import jakarta.persistence.criteria.Predicate;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -188,6 +186,12 @@ public class MovieServiceImpl implements MovieService {
 
     }
 
+    @Override
+    public List<MovieDto> findPageable(PageDto dto) {
+        var page =  PageRequest.of(dto.getPage(), dto.getSize());
+        var result =  movieRepo.findAll(page);
+        return movieMapper.toDtos(result.getContent());
+    }
 
     public static Specification<MovieEntity> createSpecification (MovieSearchDto dto){
         return (root, query, builder) -> {
